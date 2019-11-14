@@ -10,11 +10,10 @@ class Expenses extends React.Component {
       listOfExpenses: [],
       isLoading: true
     }
-
   }
 
   getAllExpenses = () => {
-    axios.get('http://localhost:5000/api/expenses', { withCredentials: true })
+    axios.get('/api/expenses')
       .then((responseFromApi) => {
         this.setState({
           listOfExpenses: responseFromApi.data,
@@ -28,29 +27,28 @@ class Expenses extends React.Component {
   }
 
   render() {
-    if(this.state.isLoading){
+    if (this.state.isLoading) {
       return <div>is loading...</div>
-    } 
+    }
     return (
       <div>
         <Link to='/dashboard'>Dashboard</Link>
         <br />
         <Link to='/new-expense'>New Expense</Link>
-        <br/>
-        <br/>
-        <AddNewForm getAllExpenses={this.getAllExpenses} />
+        <br />
+        <br />
+        <AddNewForm getAllExpenses={() => this.getAllExpenses()} />
         <ul>
           {this.state.listOfExpenses.map(e => {
-          return (
-            <div>
-            <li>{e.payee}</li>
-            <li>{e.amount}</li>
-            <li>{e.category}</li>
-            <li>{e.dateOfExpense}</li>
-            <br/>
-            </div>
-            
-          )
+            return (
+              <div key={e._id}>
+                <li>{e.payee}</li>
+                <li>{e.amount}</li>
+                <li>{e.category}</li>
+                <li>{e.dateOfExpense}</li>
+                <br />
+              </div>
+            )
           })}
         </ul>
       </div>

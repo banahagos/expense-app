@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
-
 
 class AddNewForm extends Component {
   constructor(props) {
@@ -17,10 +15,11 @@ class AddNewForm extends Component {
 
   handleFormSubmit = e => {
     e.preventDefault();
+    this.props.getAllExpenses()
     const { payee, category, dateOfExpense, monthlyRecurring } = this.state
     const amount = parseFloat(this.state.amount)
-    
-    axios.post("http://localhost:5000/api/new-expense", { payee, amount, category, dateOfExpense, monthlyRecurring }, { withCredentials: true })
+
+    axios.post("/api/new-expense", { payee, amount, category, dateOfExpense, monthlyRecurring })
       .then(() => {
         this.setState({
           payee: '',
@@ -31,9 +30,6 @@ class AddNewForm extends Component {
         })
       })
       .catch(err => console.log(err))
-  
-      console.log(this.props)
-      
   }
 
   handleInputChange = e => {
@@ -49,8 +45,6 @@ class AddNewForm extends Component {
   render() {
     return (
       <div>
-       
-       
         <form onSubmit={this.handleFormSubmit}>
           <input type='text' name='payee' value={this.state.payee} onChange={e => this.handleInputChange(e)} placeholder='Payee' />
           <input name='amount' type='number' value={this.state.amount} onChange={e => this.handleInputChange(e)} placeholder='Amount' />
