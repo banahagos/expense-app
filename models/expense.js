@@ -19,7 +19,8 @@ const expenseSchema = new Schema(
         delete ret.__v;
       }
     }
-  });
+  }
+  );
 
 const Expense = mongoose.model('Expense', expenseSchema);
 

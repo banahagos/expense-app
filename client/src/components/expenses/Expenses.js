@@ -1,15 +1,34 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import AddNewForm from './AddNewForm';
+import AddExpenseForm from './AddExpenseForm';
+import Moment from 'react-moment';
+
 
 class Expenses extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       listOfExpenses: [],
-      isLoading: true
+      isLoading: true,
+      isAddFormVisible: true,
     }
+  }
+
+  handleAddFormVisibility = () => {
+    this.setState({
+      isAddFormVisible: !this.state.isAddFormVisible
+    })
+  }
+
+  handleEditFormVisibility = e => {
+    
+    if(e.target.name === this.props.match.params.id){
+      this.setState({
+        editExpense: e.target.name
+      })
+    }
+    
   }
 
   getAllExpenses = () => {
@@ -31,22 +50,27 @@ class Expenses extends React.Component {
     if (this.state.isLoading) {
       return <div>is loading...</div>
     }
+    
+    
+   
+
     return (
       <div>
         <Link to='/dashboard'>Dashboard</Link>
         <br />
-        <Link to='/new-expense'>New Expense</Link>
         <br />
         <br />
-        <AddNewForm getAllExpenses={() => this.getAllExpenses()} />
+        {!this.state.isAddFormVisible ? <button onClick={this.handleAddFormVisibility}>Add new expense</button> : ''}
+        {this.state.isAddFormVisible ? <AddExpenseForm getAllExpenses={() => this.getAllExpenses()} handleAddFormVisibility={() => this.handleAddFormVisibility()} /> : ''}
         <ul>
           {this.state.listOfExpenses.map(e => {
             return (
               <div key={e._id}>
                 <li>{e.payee}</li>
-                <li>{e.amount}</li>
+                <li>{e.amount}€</li>
                 <li>{e.category}</li>
-                <li>{e.dateOfExpense}</li>
+                <li><Moment format="DD.MM.YYYY">{e.dateOfExpense}</Moment></li>
+                <Link to={`/expenses/${e._id}`}> <button name={e._id} onClick={this.handleEditFormVisibility}>Edit</button></Link>       
                 <br />
               </div>
             )

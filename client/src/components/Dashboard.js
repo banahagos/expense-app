@@ -7,7 +7,6 @@ class Dashboard extends React.Component {
     return (
       <div>
         <h1>Hello {this.props.userInSession.username}</h1>
-        <Link to='/new-expense'>Add new expense</Link>
         <br/>
         <Link to='/expenses'>Expenses</Link>
       </div>

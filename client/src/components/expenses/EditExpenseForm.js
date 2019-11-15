@@ -1,39 +1,42 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class AddNewForm extends Component {
+
+class EditExpenseForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      payee: '',
-      amount: '',
-      category: '',
-      dateOfExpense: '2019-11-13',
-      monthlyRecurring: false,
+      payee: this.props.theExpense.payee,
+      amount: this.props.theExpense.amount,
+      category: this.props.theExpense.category,
+      dateOfExpense: this.props.theExpense.dateOfExpense,
+      monthlyRecurring: this.props.theExpense.monthlyRecurring,
       errMsg: null
     };
   }
 
   handleFormSubmit = e => {
+    console.log("this.props.theExpense._id", this.props.theExpense._id)
     e.preventDefault();
-    this.props.getAllExpenses()
     const { payee, category, dateOfExpense, monthlyRecurring } = this.state
     const amount = parseFloat(this.state.amount)
 
-    axios.post("/api/new-expense", { payee, amount, category, dateOfExpense, monthlyRecurring })
+    axios.put(`/api/expenses/${this.props.theExpense._id}`, { payee, amount, category, dateOfExpense, monthlyRecurring })
       .then(() => {
+        this.props.getTheExpense();
+        this.props.history.push('/expenses')
         this.setState({
           payee: '',
-          amount: '',
+          amount:'',
           category: '',
           dateOfExpense: '',
-          monthlyRecurring: false,
+          monthlyRecurring: '',
           errMsg: null
         })
       })
       .catch(error => {
+        console.log(error)
         this.setState({ errMsg: error.response.data.message })
-
       })
   }
 
@@ -54,10 +57,10 @@ class AddNewForm extends Component {
           <input type='text' name='payee' value={this.state.payee} onChange={e => this.handleInputChange(e)} placeholder='Payee' />
           <input name='amount' type='number' value={this.state.amount} onChange={e => this.handleInputChange(e)} placeholder='Amount' />
           <input name='category' type='text' value={this.state.category} onChange={e => this.handleInputChange(e)} placeholder='Category' />
-          <input name='dateOfExpense' type='date' value={this.state.dateOfExpense} onChange={e => this.handleInputChange(e)} placeholder='Date' />
+          <input name='dateOfExpense' type='date' value={this.state.dateOfExpense.slice(0,10)} onChange={e => this.handleInputChange(e)} placeholder='Date' />
           <input type='checkbox' name='monthlyRecurring' onChange={e => this.handleCheckboxChange(e)} />
           <label>Monthly recurring</label>
-          <button type='submit'>Submit</button>
+          <button type='submit'>Edit</button>
         </form>
         {this.state.errMsg ? this.state.errMsg : ''}
       </div>
@@ -65,4 +68,4 @@ class AddNewForm extends Component {
   }
 }
 
-export default AddNewForm;
+export default EditExpenseForm;

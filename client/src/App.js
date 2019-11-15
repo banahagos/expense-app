@@ -7,7 +7,8 @@ import Signup from './components/auth/Signup';
 import Logout from './components/auth/Logout';
 import UnloggedHome from './components/Home';
 import Expenses from './components/expenses/Expenses';
-import AddNewForm from './components/expenses/AddNewForm'
+import DetailExpense from './components/expenses/DetailExpense';
+
 
 
 class App extends React.Component {
@@ -17,22 +18,6 @@ class App extends React.Component {
     this.service = new AuthService()
   }
 
-  // fetchUser() {
-  //   if (this.state.loggedInUser === null) {
-  //     this.service.loggedin()
-  //       .then(response => {
-  //         this.setState({
-  //           loggedInUser: response
-  //         })
-  //       })
-  //       .catch(err => {
-  //         this.setState({
-  //           loggedInUser: false
-  //         })
-  //       })
-  //   }
-  // }
-
   getTheUser = (userObj) => {
     this.setState({
       loggedInUser: userObj
@@ -40,17 +25,17 @@ class App extends React.Component {
   }
 
   render() {
-    // this.fetchUser()
     if (this.state.loggedInUser) {
       return (
         <div className='App'>
-          <Logout userInSession={this.state.loggedInUser} getUser={this.getTheUser}/>
+          <Logout userInSession={this.state.loggedInUser} getUser={this.getTheUser} />
           <Switch>
             <Route exact path='/dashboard' render={() => <Dashboard userInSession={this.state.loggedInUser} />} />
-            <Route path='/signup' render={() =>  <Redirect to='/dashboard'></Redirect>} />
-            <Route path='/login' render={() =>  <Redirect to='/dashboard'></Redirect>} />
+            <Route path='/signup' render={() => <Redirect to='/dashboard'></Redirect>} />
+            <Route path='/login' render={() => <Redirect to='/dashboard'></Redirect>} />
             <Route exact path='/expenses' component={Expenses} />
-            <Route exact path='/new-expense' component={AddNewForm} />
+            {/* <Route path='/expenses/:id' render={props => <EditExpenseForm {...props} />}/> */}
+            <Route exact path='/expenses/:id' render={props => <DetailExpense {...props} loggedInUser={this.state.loggedInUser} />}/>
           </Switch>
         </div>
       );
@@ -58,10 +43,10 @@ class App extends React.Component {
       return (
         <div className='App'>
           <Switch>
-            <Route exact path='/' component={UnloggedHome}/>
-            <Route exact path='/signup' render={() => <Signup getUser={this.getTheUser}/>}/> 
-            <Route exact path='/login' render={() => <Login getUser={this.getTheUser}/>}/> 
-            <Redirect to = '/'/>
+            <Route exact path='/' component={UnloggedHome} />
+            <Route exact path='/signup' render={() => <Signup getUser={this.getTheUser} />} />
+            <Route exact path='/login' render={() => <Login getUser={this.getTheUser} />} />
+            <Redirect to='/' />
           </Switch>
         </div>
       );
