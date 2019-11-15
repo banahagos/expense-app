@@ -19,7 +19,7 @@ class Login extends Component {
     const password = this.state.password;
     this.service.login(username, password)
       .then(response => {
-        this.setState({ username: "", password: "" });
+        this.setState({ username: "", password: "", errMsg: null });
         this.props.getUser(response)
       })
       .catch(error => {

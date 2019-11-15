@@ -20,6 +20,7 @@ class Expenses extends React.Component {
           isLoading: false
         })
       })
+      .catch(error => console.log(error))
   }
 
   componentDidMount() {

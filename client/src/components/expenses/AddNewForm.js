@@ -10,6 +10,7 @@ class AddNewForm extends Component {
       category: '',
       dateOfExpense: '2019-11-13',
       monthlyRecurring: false,
+      errMsg: null
     };
   }
 
@@ -27,9 +28,13 @@ class AddNewForm extends Component {
           category: '',
           dateOfExpense: '',
           monthlyRecurring: false,
+          errMsg: null
         })
       })
-      .catch(err => console.log(err))
+      .catch(error => {
+        this.setState({ errMsg: error.response.data.message })
+
+      })
   }
 
   handleInputChange = e => {
@@ -54,6 +59,7 @@ class AddNewForm extends Component {
           <label>Monthly recurring</label>
           <button type='submit'>Submit</button>
         </form>
+        {this.state.errMsg ? this.state.errMsg : ''}
       </div>
     )
   }
