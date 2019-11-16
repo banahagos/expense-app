@@ -49,7 +49,6 @@ class AddExpenseForm extends Component {
   }
 
   render() {
-    console.log(this.state.dateOfExpense)
     return (
       <div>
         <form onSubmit={this.handleFormSubmit} name="isAddFormVisible">

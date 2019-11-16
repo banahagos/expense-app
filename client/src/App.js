@@ -1,21 +1,16 @@
 import React from 'react';
 import { Redirect, Switch, Route } from 'react-router-dom';
-import AuthService from './components/auth/AuthService';
 import Dashboard from './components/Dashboard';
 import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
 import Logout from './components/auth/Logout';
 import UnloggedHome from './components/Home';
 import Expenses from './components/expenses/Expenses';
-import DetailExpense from './components/expenses/DetailExpense';
-
-
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = { loggedInUser: this.props.user };
-    this.service = new AuthService()
   }
 
   getTheUser = (userObj) => {
@@ -34,8 +29,6 @@ class App extends React.Component {
             <Route path='/signup' render={() => <Redirect to='/dashboard'></Redirect>} />
             <Route path='/login' render={() => <Redirect to='/dashboard'></Redirect>} />
             <Route exact path='/expenses' component={Expenses} />
-            {/* <Route path='/expenses/:id' render={props => <EditExpenseForm {...props} />}/> */}
-            <Route exact path='/expenses/:id' render={props => <DetailExpense {...props} loggedInUser={this.state.loggedInUser} />}/>
           </Switch>
         </div>
       );

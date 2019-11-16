@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import AddExpenseForm from './AddExpenseForm';
 import Moment from 'react-moment';
+import EditExpenseForm from './EditExpenseForm';
 
 
 class Expenses extends React.Component {
@@ -12,6 +13,8 @@ class Expenses extends React.Component {
       listOfExpenses: [],
       isLoading: true,
       isAddFormVisible: true,
+      isEditFormVisible: true,
+      editExpense: ''
     }
   }
 
@@ -21,14 +24,17 @@ class Expenses extends React.Component {
     })
   }
 
-  handleEditFormVisibility = e => {
-    
-    if(e.target.name === this.props.match.params.id){
-      this.setState({
-        editExpense: e.target.name
-      })
-    }
-    
+  showEditFormOfSpecificExpense = e => {
+    this.setState({
+      [e.target.name] : e.target.id,
+      isEditFormVisible: true,
+    })
+  }
+
+  closeEditFormOfSpecificExpense = e => {
+    this.setState({
+      isEditFormVisible: false,
+    })
   }
 
   getAllExpenses = () => {
@@ -47,18 +53,14 @@ class Expenses extends React.Component {
   }
 
   render() {
+    console.log('this.state.isEditFormVisible', this.state.isEditFormVisible)
     if (this.state.isLoading) {
       return <div>is loading...</div>
     }
-    
-    
-   
-
+    console.log("this.state.editExpense", this.state.editExpense)
     return (
       <div>
         <Link to='/dashboard'>Dashboard</Link>
-        <br />
-        <br />
         <br />
         {!this.state.isAddFormVisible ? <button onClick={this.handleAddFormVisibility}>Add new expense</button> : ''}
         {this.state.isAddFormVisible ? <AddExpenseForm getAllExpenses={() => this.getAllExpenses()} handleAddFormVisibility={() => this.handleAddFormVisibility()} /> : ''}
@@ -70,7 +72,17 @@ class Expenses extends React.Component {
                 <li>{e.amount}€</li>
                 <li>{e.category}</li>
                 <li><Moment format="DD.MM.YYYY">{e.dateOfExpense}</Moment></li>
-                <Link to={`/expenses/${e._id}`}> <button name={e._id} onClick={this.handleEditFormVisibility}>Edit</button></Link>       
+                <button name="editExpense" id={e._id} onClick={this.showEditFormOfSpecificExpense}>Edit</button>
+                {this.state.editExpense === e._id && this.state.isEditFormVisible ? 
+                <EditExpenseForm 
+                id={e._id} 
+                payee={e.payee} 
+                amount={e.amount} 
+                category={e.category} 
+                dateOfExpense={e.dateOfExpense} 
+                monthlyRecurring={e.monthlyRecurring} 
+                getAllExpenses={this.getAllExpenses} 
+                closeEditFormOfSpecificExpense={() => this.closeEditFormOfSpecificExpense()} /> : ''} 
                 <br />
               </div>
             )
