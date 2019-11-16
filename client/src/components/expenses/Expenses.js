@@ -39,9 +39,8 @@ class Expenses extends React.Component {
   }
 
   getExpenseUpdate = expense => {
-    console.log("expense", expense)
     axios.put(`/api/expenses/${this.state.editExpenseId}`, expense)
-      .then((res) => {
+      .then(() => {
         this.setState({
           errMsg: null
         })
@@ -64,6 +63,21 @@ class Expenses extends React.Component {
         })
       })
       .catch(error => console.log(error))
+  }
+
+  deleteExpense = e => {
+    const expenseId = e.target.id
+    axios.delete(`/api/expenses/${expenseId}`)
+      .then(() => {
+        this.setState({
+          errMsg: null
+        })
+        this.getAllExpenses()
+      })
+      .catch(error => {
+        console.log("something went wrong with delete", error)
+        this.setState({ errMsg: error.response.data.message })
+      })
   }
 
   componentDidMount() {
@@ -90,6 +104,7 @@ class Expenses extends React.Component {
                 <li>{e.category}</li>
                 <li><Moment format="DD.MM.YYYY">{e.dateOfExpense}</Moment></li>
                 <button name="editExpenseId" id={e._id} onClick={this.showEditFormOfSpecificExpense}>Edit</button>
+                <button id={e._id} onClick={this.deleteExpense}>Delete</button>
                 {this.state.editExpenseId === e._id && this.state.isEditFormVisible ? 
                 <EditExpenseForm 
                 id={e._id} 

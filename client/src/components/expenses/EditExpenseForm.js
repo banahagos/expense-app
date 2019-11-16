@@ -10,7 +10,6 @@ class EditExpenseForm extends Component {
       category: this.props.category,
       dateOfExpense: this.props.dateOfExpense,
       monthlyRecurring: this.props.monthlyRecurring,
-      errMsg: null
     };
   }
 
