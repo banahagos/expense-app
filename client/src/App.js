@@ -25,10 +25,10 @@ class App extends React.Component {
         <div className='App'>
           <Logout userInSession={this.state.loggedInUser} getUser={this.getTheUser} />
           <Switch>
-            <Route exact path='/dashboard' render={() => <Dashboard userInSession={this.state.loggedInUser} />} />
-            <Route path='/signup' render={() => <Redirect to='/dashboard'></Redirect>} />
-            <Route path='/login' render={() => <Redirect to='/dashboard'></Redirect>} />
-            <Route exact path='/expenses' component={Expenses} />
+            <Route exact path='/' render={() => <Dashboard userInSession={this.state.loggedInUser} />} />
+            <Route path='/signup' render={() => <Redirect to='/'></Redirect>} />
+            <Route path='/login' render={() => <Redirect to='/'></Redirect>} />
+            <Route path='/expenses' component={Expenses} />
           </Switch>
         </div>
       );

@@ -65,6 +65,29 @@ class Expenses extends React.Component {
       .catch(error => console.log(error))
   }
 
+  getLastWeekExpenses = () => {
+    axios.get(`/api/expenses/filter?filter=lastweek`)
+      .then((responseFromApi) => {
+        this.setState({
+          listOfExpenses: responseFromApi.data,
+          isLoading: false
+        })
+      })
+      .catch(error => console.log(error))
+  }
+
+  getLastMonthExpenses = () => {
+    axios.get(`/api/expenses/filter?filter=lastmonth`)
+      .then((responseFromApi) => {
+        this.setState({
+          listOfExpenses: responseFromApi.data,
+          isLoading: false
+        })
+      })
+      .catch(error => console.log(error))
+  }
+
+
   deleteExpense = e => {
     const expenseId = e.target.id
     axios.delete(`/api/expenses/${expenseId}`)
@@ -91,10 +114,17 @@ class Expenses extends React.Component {
   
     return (
       <div>
-        <Link to='/dashboard'>Dashboard</Link>
+        <Link to='/'>Dashboard</Link>
         <br />
         {!this.state.isAddFormVisible ? <button onClick={this.handleAddFormVisibility}>Add new expense</button> : ''}
         {this.state.isAddFormVisible ? <AddExpenseForm getAllExpenses={() => this.getAllExpenses()} handleAddFormVisibility={() => this.handleAddFormVisibility()} /> : ''}
+        <br/>
+        <Link to='expenses' onClick={() => this.getAllExpenses()}>All</Link>
+        <br/>
+        <Link to='expenses?filter=lastweek' onClick={() => this.getLastWeekExpenses()}>Last 7 days</Link>
+        <br/>
+        <Link to='expenses?filter=lastmonth' onClick={() => this.getLastMonthExpenses()}>Last 30 days</Link>
+        <br/>
         <ul>
           {this.state.listOfExpenses.map(e => {
             return (

@@ -32,6 +32,7 @@ router.get('/expenses/filter', async (req, res, next) => {
 
   try {
       const filterExpenseList = await Expense.find({owner: req.user, dateOfExpense: {$gt: dateRange }})
+      .sort({ created: -1 })
       res.json(filterExpenseList)
     }
 
