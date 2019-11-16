@@ -6,6 +6,7 @@ import Signup from './components/auth/Signup';
 import Logout from './components/auth/Logout';
 import UnloggedHome from './components/Home';
 import Expenses from './components/expenses/Expenses';
+import AddExpenseForm from './components/expenses/AddExpenseForm'
 
 class App extends React.Component {
   constructor(props) {
@@ -29,6 +30,7 @@ class App extends React.Component {
             <Route path='/signup' render={() => <Redirect to='/'></Redirect>} />
             <Route path='/login' render={() => <Redirect to='/'></Redirect>} />
             <Route path='/expenses' component={Expenses} />
+            <Route path='/new-expense' component={AddExpenseForm} />
           </Switch>
         </div>
       );

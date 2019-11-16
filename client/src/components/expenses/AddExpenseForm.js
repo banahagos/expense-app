@@ -13,10 +13,9 @@ class AddExpenseForm extends Component {
       errMsg: null,
     };
   }
-
+  
   handleFormSubmit = e => {
     e.preventDefault();
-    this.props.getAllExpenses()
     const { payee, category, dateOfExpense, monthlyRecurring } = this.state
     const amount = parseFloat(this.state.amount)
 
@@ -30,7 +29,7 @@ class AddExpenseForm extends Component {
           monthlyRecurring: false,
           errMsg: null
         })
-        this.props.handleAddFormVisibility();
+        this.props.history.push('/expenses')
       })
       .catch(error => {
         this.setState({ errMsg: error.response.data.message })

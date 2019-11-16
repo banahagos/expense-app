@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import AddExpenseForm from './AddExpenseForm';
 import Moment from 'react-moment';
 import EditExpenseForm from './EditExpenseForm';
 
@@ -12,22 +11,15 @@ class Expenses extends React.Component {
     this.state = {
       listOfExpenses: [],
       isLoading: true,
-      isAddFormVisible: true,
       isEditFormVisible: true,
       editExpenseId: '',
       errMsg: null
     }
   }
 
-  handleAddFormVisibility = () => {
-    this.setState({
-      isAddFormVisible: !this.state.isAddFormVisible
-    })
-  }
-
   showEditFormOfSpecificExpense = e => {
     this.setState({
-      [e.target.name] : e.target.id,
+      [e.target.name]: e.target.id,
       isEditFormVisible: true,
     })
   }
@@ -53,7 +45,7 @@ class Expenses extends React.Component {
         this.setState({ errMsg: error.response.data.message })
       })
   }
-  
+
   getAllExpenses = () => {
     axios.get('/api/expenses')
       .then((responseFromApi) => {
@@ -111,20 +103,20 @@ class Expenses extends React.Component {
     if (this.state.isLoading) {
       return <div>is loading...</div>
     }
-  
+
     return (
       <div>
         <Link to='/'>Dashboard</Link>
         <br />
-        {!this.state.isAddFormVisible ? <button onClick={this.handleAddFormVisibility}>Add new expense</button> : ''}
-        {this.state.isAddFormVisible ? <AddExpenseForm getAllExpenses={() => this.getAllExpenses()} handleAddFormVisibility={() => this.handleAddFormVisibility()} /> : ''}
-        <br/>
+        <Link to='/new-expense'>Add new expense</Link>
+        <br />
+        <br />
         <Link to='expenses' onClick={() => this.getAllExpenses()}>All</Link>
-        <br/>
+        <br />
         <Link to='expenses?filter=lastweek' onClick={() => this.getLastWeekExpenses()}>Last 7 days</Link>
-        <br/>
+        <br />
         <Link to='expenses?filter=lastmonth' onClick={() => this.getLastMonthExpenses()}>Last 30 days</Link>
-        <br/>
+        <br />
         <ul>
           {this.state.listOfExpenses.map(e => {
             return (
@@ -135,18 +127,18 @@ class Expenses extends React.Component {
                 <li><Moment format="DD.MM.YYYY">{e.dateOfExpense}</Moment></li>
                 <button name="editExpenseId" id={e._id} onClick={this.showEditFormOfSpecificExpense}>Edit</button>
                 <button id={e._id} onClick={this.deleteExpense}>Delete</button>
-                {this.state.editExpenseId === e._id && this.state.isEditFormVisible ? 
-                <EditExpenseForm 
-                id={e._id} 
-                payee={e.payee} 
-                amount={e.amount} 
-                category={e.category} 
-                dateOfExpense={e.dateOfExpense} 
-                monthlyRecurring={e.monthlyRecurring} 
-                getExpenseUpdate={this.getExpenseUpdate} 
-                errMsg={this.state.errMsg}
-                /> : ''} 
-               <br/>
+                {this.state.editExpenseId === e._id && this.state.isEditFormVisible ?
+                  <EditExpenseForm
+                    id={e._id}
+                    payee={e.payee}
+                    amount={e.amount}
+                    category={e.category}
+                    dateOfExpense={e.dateOfExpense}
+                    monthlyRecurring={e.monthlyRecurring}
+                    getExpenseUpdate={this.getExpenseUpdate}
+                    errMsg={this.state.errMsg}
+                  /> : ''}
+                <br />
               </div>
             )
           })}
