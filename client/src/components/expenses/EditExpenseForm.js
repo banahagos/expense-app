@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
-class AddExpenseForm extends Component {
+
+class EditExpenseForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,21 +16,10 @@ class AddExpenseForm extends Component {
 
   handleFormSubmit = e => {
     e.preventDefault();
-    this.props.getAllExpenses()
     const { payee, category, dateOfExpense, monthlyRecurring } = this.state
     const amount = parseFloat(this.state.amount)
-
-    axios.put(`/api/expenses/${this.props.id}`, { payee, amount, category, dateOfExpense, monthlyRecurring })
-      .then(() => {
-        this.setState({
-          errMsg: null
-        })
-        this.props.closeEditFormOfSpecificExpense()
-      })
-      .catch(error => {
-        this.setState({ errMsg: error.response.data.message })
-
-      })
+    const expense = { payee, amount, category, dateOfExpense, monthlyRecurring }
+    this.props.getExpenseUpdate(expense)
   }
 
   handleInputChange = e => {
@@ -55,10 +44,10 @@ class AddExpenseForm extends Component {
           <label>Monthly recurring</label>
           <button type='submit'>Save</button>
         </form>
-        {this.state.errMsg ? this.state.errMsg : ''}
+        {this.props.errMsg ? this.props.errMsg : ''}
       </div>
     )
   }
 }
 
-export default AddExpenseForm;
+export default EditExpenseForm;

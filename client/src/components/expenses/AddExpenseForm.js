@@ -10,7 +10,7 @@ class AddExpenseForm extends Component {
       category: '',
       dateOfExpense: '',
       monthlyRecurring: false,
-      errMsg: null
+      errMsg: null,
     };
   }
 

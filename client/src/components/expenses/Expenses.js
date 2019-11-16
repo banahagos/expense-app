@@ -14,7 +14,8 @@ class Expenses extends React.Component {
       isLoading: true,
       isAddFormVisible: true,
       isEditFormVisible: true,
-      editExpense: ''
+      editExpenseId: '',
+      errMsg: null
     }
   }
 
@@ -37,6 +38,23 @@ class Expenses extends React.Component {
     })
   }
 
+  getExpenseUpdate = expense => {
+    console.log("expense", expense)
+    axios.put(`/api/expenses/${this.state.editExpenseId}`, expense)
+      .then((res) => {
+        this.setState({
+          errMsg: null
+        })
+        this.getAllExpenses()
+        this.closeEditFormOfSpecificExpense()
+
+      })
+      .catch(error => {
+        console.log("something went wrong with edit", error)
+        this.setState({ errMsg: error.response.data.message })
+      })
+  }
+  
   getAllExpenses = () => {
     axios.get('/api/expenses')
       .then((responseFromApi) => {
@@ -53,11 +71,10 @@ class Expenses extends React.Component {
   }
 
   render() {
-    console.log('this.state.isEditFormVisible', this.state.isEditFormVisible)
     if (this.state.isLoading) {
       return <div>is loading...</div>
     }
-    console.log("this.state.editExpense", this.state.editExpense)
+  
     return (
       <div>
         <Link to='/dashboard'>Dashboard</Link>
@@ -72,8 +89,8 @@ class Expenses extends React.Component {
                 <li>{e.amount}€</li>
                 <li>{e.category}</li>
                 <li><Moment format="DD.MM.YYYY">{e.dateOfExpense}</Moment></li>
-                <button name="editExpense" id={e._id} onClick={this.showEditFormOfSpecificExpense}>Edit</button>
-                {this.state.editExpense === e._id && this.state.isEditFormVisible ? 
+                <button name="editExpenseId" id={e._id} onClick={this.showEditFormOfSpecificExpense}>Edit</button>
+                {this.state.editExpenseId === e._id && this.state.isEditFormVisible ? 
                 <EditExpenseForm 
                 id={e._id} 
                 payee={e.payee} 
@@ -81,9 +98,10 @@ class Expenses extends React.Component {
                 category={e.category} 
                 dateOfExpense={e.dateOfExpense} 
                 monthlyRecurring={e.monthlyRecurring} 
-                getAllExpenses={this.getAllExpenses} 
-                closeEditFormOfSpecificExpense={() => this.closeEditFormOfSpecificExpense()} /> : ''} 
-                <br />
+                getExpenseUpdate={this.getExpenseUpdate} 
+                errMsg={this.state.errMsg}
+                /> : ''} 
+               <br/>
               </div>
             )
           })}
