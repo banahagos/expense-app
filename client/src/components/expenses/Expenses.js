@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Moment from 'react-moment';
 import EditExpenseForm from './EditExpenseForm';
+import TotalExpenses from './TotalExpenses';
 
 
 class Expenses extends React.Component {
@@ -116,6 +117,8 @@ class Expenses extends React.Component {
         <Link to='expenses?filter=lastweek' onClick={() => this.getLastWeekExpenses()}>Last 7 days</Link>
         <br />
         <Link to='expenses?filter=lastmonth' onClick={() => this.getLastMonthExpenses()}>Last 30 days</Link>
+        <br />
+        <TotalExpenses listOfExpenses={this.state.listOfExpenses}  />
         <br />
         <ul>
           {this.state.listOfExpenses.map(e => {
