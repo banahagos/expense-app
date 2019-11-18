@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class OverviewExpenses extends React.Component {
 
@@ -9,30 +10,31 @@ class OverviewExpenses extends React.Component {
   render() {
     return (
       <div>
-        <div className="filter-btn">
-          <button onClick={this.handleFilterOnClick}>All</button>
-          <button name='?filter=lastweek' onClick={this.handleFilterOnClick}>Last 7 days</button>
-          <button name='?filter=lastmonth' onClick={this.handleFilterOnClick}>Last 30 days</button>
-        </div>
-        <div className="overview-expenses-box">
+        <nav className="panel">
+          <p className="panel-tabs">
+            <Link onClick={this.handleFilterOnClick} className={this.props.currentFilter === '' ? 'is-active' : ''}>All</Link>
+            <Link name='?filter=lastweek' onClick={this.handleFilterOnClick} className={this.props.currentFilter === '?filter=lastweek' ? 'is-active' : ''}>Last week</Link>
+            <Link name='?filter=lastmonth' onClick={this.handleFilterOnClick} className={this.props.currentFilter === '?filter=lastmonth' ? 'is-active' : ''} >Last month</Link>
+          </p>
+        </nav>
+        <div className="tile is-child notification is-primary overview-expenses-box">
           <div className="overview-expenses">
-
             <div className="overview-expenses-left">
               <div>
-                <h1>{this.props.listOfTodayExpenses.map(e => e.amount).reduce((acc, val) => { return acc + val }, 0)}€</h1>
+                <p className="title">{this.props.listOfTodayExpenses.map(e => e.amount).reduce((acc, val) => { return acc + val }, 0)}€</p>
                 <div>
-                  <p>Today</p>
+                  <p className="subtitle">Today</p>
                   {/* <p>- x €</p> */}
                 </div>
               </div>
             </div>
             <div className="overview-expenses-right">
               <div>
-                <h1>{this.props.listOfExpenses.map(e => e.amount).reduce((acc, val) => { return acc + val }, 0)}€</h1>
+                <p className="title">{this.props.listOfExpenses.map(e => e.amount).reduce((acc, val) => { return acc + val }, 0)}€</p>
                 <div>
-                  {this.props.currentFilter === '?filter=lastweek' ? <p>Week</p> : ''}
-                  {this.props.currentFilter === '?filter=lastmonth' ? <p>Month</p> : ''}
-                  {this.props.currentFilter === '' ? <p>Total</p> : ''}
+                  {this.props.currentFilter === '?filter=lastweek' ? <p className="subtitle">Week</p> : ''}
+                  {this.props.currentFilter === '?filter=lastmonth' ? <p className="subtitle">Month</p> : ''}
+                  {this.props.currentFilter === '' ? <p className="subtitle">Total</p> : ''}
                   {/* <p>+ y €</p> */}
                 </div>
               </div>

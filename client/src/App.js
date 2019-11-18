@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Dashboard, UnloggedHome } from './components/home'
 import { Login, Signup, Logout } from './components/auth';
 import { ListExpenses, AddExpenseForm, OverviewExpenses } from './components/expenses';
+import Navbar from './components/navbar/Navbar';
 
 
 class App extends React.Component {
@@ -54,6 +55,7 @@ class App extends React.Component {
     if (this.state.loggedInUser) {
       return (
         <div className='App'>
+          <Navbar />
           <div className="logout">
             <Logout userInSession={this.state.loggedInUser} getUser={this.getTheUser} />
           </div>
