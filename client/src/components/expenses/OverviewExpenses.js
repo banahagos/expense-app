@@ -1,9 +1,6 @@
 import React from 'react';
 
 class OverviewExpenses extends React.Component {
-  constructor(props) {
-    super(props)
-  }
 
   handleFilterOnClick = e => {
     this.props.getExpenses(e.target.name)

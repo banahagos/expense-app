@@ -5,7 +5,7 @@ import Moment from 'react-moment';
 import EditExpenseForm from './EditExpenseForm';
 
 
-class ListExpense extends React.Component {
+class ListExpenses extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -118,4 +118,4 @@ class ListExpense extends React.Component {
   }
 }
 
-export default ListExpense;
+export default ListExpenses;
