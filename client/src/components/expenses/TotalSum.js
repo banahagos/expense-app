@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TotalExpenses = props => {
+const TotalSum = props => {
   return (
     <div>
       <h5>Total Expenses</h5>
@@ -9,4 +9,4 @@ const TotalExpenses = props => {
   )
 }
 
-export default TotalExpenses
+export default TotalSum

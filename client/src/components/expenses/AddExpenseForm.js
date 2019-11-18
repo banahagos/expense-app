@@ -32,6 +32,7 @@ class AddExpenseForm extends Component {
         this.props.history.push('/expenses')
       })
       .catch(error => {
+        console.log("somethimg weng wrong with adding an expense,", error)
         this.setState({ errMsg: error.response.data.message })
 
       })

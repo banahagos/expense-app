@@ -17,7 +17,7 @@ class EditExpenseForm extends Component {
     e.preventDefault();
     const { payee, category, dateOfExpense, monthlyRecurring } = this.state
     const amount = parseFloat(this.state.amount)
-    this.props.getExpenseUpdate({
+    this.props.updateExpense({
       payee,
       amount,
       category,
@@ -49,6 +49,7 @@ class EditExpenseForm extends Component {
           <button type='submit'>Save</button>
         </form>
         {this.props.errMsg ? this.props.errMsg : ''}
+        <button id={this.props.id} onClick={this.props.deleteExpense}>Delete</button>
       </div>
     )
   }

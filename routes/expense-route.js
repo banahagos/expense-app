@@ -5,21 +5,21 @@ const mongoose = require('mongoose');
 const { startOfDay, subWeeks, subMonths } = require('date-fns') ;
 
 
-// Get route ==> get all expenses
-router.get('/expenses', async (req, res, next) => {
+// // Get route ==> get all expenses
+// router.get('/expenses', async (req, res, next) => {
 
-  try {
-    const expenseList = await Expense.find({ owner: req.user })
-      .sort({ created: -1 })
-    res.json(expenseList)
-  }
-  catch (err) {
-    res.json(err)
-  }
-})
+//   try {
+//     const expenseList = await Expense.find({ owner: req.user })
+//       .sort({ created: -1 })
+//     res.json(expenseList)
+//   }
+//   catch (err) {
+//     res.json(err)
+//   }
+// })
 
 // GET route => filter expenses by dates 
-router.get('/expenses/filter', async (req, res, next) => {
+router.get('/expenses/', async (req, res, next) => {
   const lastWeek = startOfDay(subWeeks(Date.now(), 1));
   const lastMonth = startOfDay(subMonths(Date.now(), 1));
 
@@ -31,9 +31,15 @@ router.get('/expenses/filter', async (req, res, next) => {
   }
 
   try {
+    if(req.query.filter){
       const filterExpenseList = await Expense.find({owner: req.user, dateOfExpense: {$gt: dateRange }})
       .sort({ created: -1 })
       res.json(filterExpenseList)
+    } else {
+      const expenseList = await Expense.find({owner: req.user })
+      .sort({ created: -1 })
+      res.json(expenseList)
+    }
     }
 
   catch(err){
@@ -43,12 +49,15 @@ router.get('/expenses/filter', async (req, res, next) => {
 
 // Post route ==> create new expense
 router.post('/new-expense', (req, res, next) => {
-  const { payee, amount, category, dateOfExpense, monthlyRecurring } = req.body
+  const { amount, category, dateOfExpense, monthlyRecurring } = req.body
+
+  const payee = req.body.payee.toUpperCase()
 
   if (!payee || !amount || !category || !dateOfExpense) {
     res.status(400).json({ message: 'Please fill out all fields' });
     return;
   }
+
   Expense.create({
     payee,
     amount,
@@ -80,7 +89,8 @@ router.post('/new-expense', (req, res, next) => {
 
 // PUT route => to update a specific expense
 router.put('/expenses/:id', (req, res, next) => {
-  const { payee, category, amount, dateOfExpense, monthlyRecurring } = req.body
+  const { category, amount, dateOfExpense, monthlyRecurring } = req.body
+  const payee = req.body.payee.toUpperCase()
 
   if (!payee || !amount || !category || !dateOfExpense) {
     res.status(400).json({ message: 'Please fill out all fields' });
