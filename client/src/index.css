@@ -48,7 +48,17 @@ code {
   border: 1px solid #242A52;
   border-radius: 25px;
   width: 250px;
-  
 }
+
+.filter-btn{
+  margin-top: 20px;
+}
+
+.logout{
+  display: flex;
+  justify-content: flex-end;
+  margin: 0px;
+}
+
 
 

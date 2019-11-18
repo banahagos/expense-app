@@ -13,7 +13,7 @@ class AddExpenseForm extends Component {
       errMsg: null,
     };
   }
-  
+
   handleFormSubmit = e => {
     e.preventDefault();
     const { payee, category, dateOfExpense, monthlyRecurring } = this.state

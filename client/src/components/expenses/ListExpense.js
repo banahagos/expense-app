@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Moment from 'react-moment';
 import EditExpenseForm from './EditExpenseForm';
-import OverviewExpenses from './OverviewExpenses';
+
 
 class ListExpense extends React.Component {
   constructor(props) {
@@ -34,7 +34,8 @@ class ListExpense extends React.Component {
         this.setState({
           errMsg: null
         })
-        this.props.getAllExpenses(this.props.currentFilter)
+        this.props.getExpenses(this.props.currentFilter)
+        this.props.getTodayExpenses()
         this.closeEditFormOfSpecificExpense()
 
       })
@@ -51,7 +52,8 @@ class ListExpense extends React.Component {
         this.setState({
           errMsg: null
         })
-        this.props.getAllExpenses(this.props.currentFilter)
+        this.props.getExpenses(this.props.currentFilter)
+        this.props.getTodayExpenses()
       })
       .catch(error => {
         console.log("something went wrong with delete", error)
@@ -59,13 +61,9 @@ class ListExpense extends React.Component {
       })
   }
 
-  handleFilterOnClick = e => {
-    this.props.getAllExpenses(e.target.name)
-  }
-
-
   componentDidMount() {
-    this.props.getAllExpenses(this.props.currentFilter)
+    this.props.getExpenses(this.props.currentFilter)
+    this.props.getTodayExpenses()
   }
 
   render() {
@@ -78,17 +76,6 @@ class ListExpense extends React.Component {
         <br />
         <Link to='/new-expense'>Add new expense</Link>
         <br />
-        <br />
-        <Link to='/expenses' name=''><button onClick={this.handleFilterOnClick}>All</button></Link>
-        <br />
-        <Link to='/expenses'><button name='?filter=lastweek' onClick={this.handleFilterOnClick}>Last 7 days</button></Link>
-        <br />
-        <Link to='/expenses'><button name='?filter=lastmonth' onClick={this.handleFilterOnClick}>Last 30 days</button></Link>
-
-        <br />
-
-        <OverviewExpenses listOfExpenses={this.props.listOfExpenses} />
-
 
 
         <br />

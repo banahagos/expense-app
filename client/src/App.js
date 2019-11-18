@@ -7,7 +7,8 @@ import Signup from './components/auth/Signup';
 import Logout from './components/auth/Logout';
 import UnloggedHome from './components/Home';
 import ListExpense from './components/expenses/ListExpense';
-import AddExpenseForm from './components/expenses/AddExpenseForm'
+import AddExpenseForm from './components/expenses/AddExpenseForm';
+import OverviewExpenses from './components/expenses/OverviewExpenses'
 
 class App extends React.Component {
   constructor(props) {
@@ -15,8 +16,10 @@ class App extends React.Component {
     this.state = {
       loggedInUser: this.props.user,
       listOfExpenses: [],
-      currentFilter: '',
-      // isLoading: true,
+      listOfTodayExpenses: [],
+      currentFilter: '?filter=lastweek',
+      isTodayExpensesLoading: true,
+      isListOfExpensesLoading: true,
     };
   }
 
@@ -26,7 +29,7 @@ class App extends React.Component {
     })
   }
 
-  getAllExpenses = (filter) => {
+  getExpenses = (filter) => {
     this.setState({
       currentFilter: filter
     })
@@ -34,52 +37,59 @@ class App extends React.Component {
       .then((responseFromApi) => {
         this.setState({
           listOfExpenses: responseFromApi.data,
-          // isLoading: false
+          isListOfExpensesLoading: false
         })
       })
       .catch(error => console.log(error))
   }
 
-  // getLastWeekExpenses = () => {
-  //   axios.get(`/api/expenses/filter?filter=lastweek`)
-  //     .then((responseFromApi) => {
-  //       return responseFromApi.data
-  //     })
-  //     .catch(error => console.log(error))
-  // }
+  getTodayExpenses = () => {
+    axios.get(`/api/today`)
+      .then((responseFromApi) => {
+        this.setState({
+          listOfTodayExpenses: responseFromApi.data,
+          isTodayExpensesLoading: false
+        })
+      })
+      .catch(error => console.log(error))
+  }
 
-  // getLastMonthExpenses = () => {
-  //   axios.get(`/api/expenses/filter?filter=lastmonth`)
-  //     .then((responseFromApi) => {
-  //       this.setState({
-  //         listOfExpenses: responseFromApi.data,
-  //       })
-  //     })
-  //     .catch(error => console.log(error))
-  // }
+  componentDidMount(){
+    this.getTodayExpenses()
+    this.getExpenses(this.state.currentFilter);
+  }
 
   render() {
+    if(this.state.isTodayExpensesLoading|| this.state.isListOfExpensesLoading){
+      return <div>...loading</div>
+    }
     if (this.state.loggedInUser) {
       return (
         <div className='App'>
+          <div className="logout">
           <Logout userInSession={this.state.loggedInUser} getUser={this.getTheUser} />
-          <Switch>
-           
-            <Route exact path='/' render={() => 
-            <Dashboard 
-            userInSession={this.state.loggedInUser} 
+          </div>
+          <OverviewExpenses
+            currentFilter={this.state.currentFilter}
+            listOfTodayExpenses={this.state.listOfTodayExpenses}
             listOfExpenses={this.state.listOfExpenses}
-            isLoading={this.state.isLoading}
-            getAllExpenses={this.getAllExpenses}
-            />} />
+            getExpenses={this.getExpenses}
+            
+          />
+          <Switch>
+            <Route exact path='/' render={() =>
+              <Dashboard
+                userInSession={this.state.loggedInUser}
+              />} />
             <Route path='/signup' render={() => <Redirect to='/'></Redirect>} />
             <Route path='/login' render={() => <Redirect to='/'></Redirect>} />
             <Route exact path='/expenses' render={props =>
               <ListExpense
-              {...props}
+                {...props}
                 listOfExpenses={this.state.listOfExpenses}
-                getAllExpenses={this.getAllExpenses}
+                getExpenses={this.getExpenses}
                 currentFilter={this.state.currentFilter}
+                getTodayExpenses={this.getTodayExpenses}
               />} />
             <Route path='/new-expense' component={AddExpenseForm} />
           </Switch>

@@ -2,47 +2,47 @@ const express = require('express');
 const router = express.Router();
 const Expense = require('../models/expense');
 const mongoose = require('mongoose');
-const { startOfDay, subWeeks, subMonths } = require('date-fns') ;
+const { startOfDay, subWeeks, subMonths } = require('date-fns');
 
 
-// // Get route ==> get all expenses
-// router.get('/expenses', async (req, res, next) => {
-
-//   try {
-//     const expenseList = await Expense.find({ owner: req.user })
-//       .sort({ created: -1 })
-//     res.json(expenseList)
-//   }
-//   catch (err) {
-//     res.json(err)
-//   }
-// })
-
-// GET route => filter expenses by dates 
+// GET route => get expenses (filter by dates  or all)
 router.get('/expenses/', async (req, res, next) => {
   const lastWeek = startOfDay(subWeeks(Date.now(), 1));
   const lastMonth = startOfDay(subMonths(Date.now(), 1));
 
   let dateRange;
-  switch(req.query.filter){
+  switch (req.query.filter) {
     case 'lastweek': dateRange = lastWeek;
       break;
-    case 'lastmonth': dateRange = lastMonth
+    case 'lastmonth': dateRange = lastMonth;
   }
 
   try {
-    if(req.query.filter){
-      const filterExpenseList = await Expense.find({owner: req.user, dateOfExpense: {$gt: dateRange }})
-      .sort({ created: -1 })
+    if (req.query.filter) {
+      const filterExpenseList = await Expense.find({ owner: req.user, dateOfExpense: { $gt: dateRange } })
+        .sort({ created: -1 })
       res.json(filterExpenseList)
     } else {
-      const expenseList = await Expense.find({owner: req.user })
-      .sort({ created: -1 })
+      const expenseList = await Expense.find({ owner: req.user })
+        .sort({ created: -1 })
       res.json(expenseList)
     }
-    }
+  }
 
-  catch(err){
+  catch (err) {
+    res.json(err)
+  }
+})
+
+// GET route => today expenses
+router.get('/today', async (req, res, next) => {
+  const today = startOfDay(Date.now())
+
+  try {
+    const todayExpenses = await Expense.find({ owner: req.user, dateOfExpense: { $gte: today } })
+    res.json(todayExpenses)
+  }
+  catch (err) {
     res.json(err)
   }
 })
