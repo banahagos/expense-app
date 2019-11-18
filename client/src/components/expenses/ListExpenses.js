@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import Moment from 'react-moment';
 import EditExpenseForm from './EditExpenseForm';
+import ListItem from './ListItem';
 
 
 class ListExpenses extends React.Component {
@@ -16,8 +16,9 @@ class ListExpenses extends React.Component {
   }
 
   showEditFormOfSpecificExpense = e => {
+    console.log(e.target.id)
     this.setState({
-      [e.target.name]: e.target.id,
+      [e.target.title]: e.target.id,
       isEditFormVisible: true,
     })
   }
@@ -82,16 +83,16 @@ class ListExpenses extends React.Component {
         {this.props.listOfExpenses.map(e => {
           return (
             <div key={e._id}>
-              <Link to='/expenses' className="list-item" name="editExpenseId" id={e._id} onClick={this.showEditFormOfSpecificExpense}>
-                <div className='left-content list-content'>
-                  <h4>{e.payee}</h4>
-                  <p><Moment format="DD/MM/YYYY">{e.dateOfExpense}</Moment></p>
-                </div>
-                <div className='right-content'>
-                  <h3>{e.amount}</h3>
-                  <p>{e.category}</p>
-                </div>
-              </Link>
+              <div title="editExpenseId" id={e._id} onClick={this.showEditFormOfSpecificExpense}>
+                <ListItem
+                  payee={e.payee}
+                  amount={e.amount}
+                  dateOfExpense={e.dateOfExpense}
+                  category={e.category}
+                  id={e._id}
+                  title="editExpenseId"
+                />
+              </div>
               {this.state.editExpenseId === e._id && this.state.isEditFormVisible ?
                 <EditExpenseForm
                   id={e._id}
@@ -106,6 +107,7 @@ class ListExpenses extends React.Component {
                 /> : ''
               }
             </div>
+
 
           )
         }

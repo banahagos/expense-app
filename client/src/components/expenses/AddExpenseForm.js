@@ -51,7 +51,7 @@ class AddExpenseForm extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleFormSubmit} name="isAddFormVisible">
+        <form onSubmit={this.handleFormSubmit}>
           <input type='text' name='payee' value={this.state.payee} onChange={e => this.handleInputChange(e)} placeholder='Payee' />
           <input name='amount' type='number' value={this.state.amount} onChange={e => this.handleInputChange(e)} placeholder='Amount' />
           <input name='category' type='text' value={this.state.category} onChange={e => this.handleInputChange(e)} placeholder='Category' />
