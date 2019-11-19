@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 import { Dashboard, UnloggedHome } from './components/home'
-import { Login, Signup, Logout } from './components/auth';
+import { Login, Signup } from './components/auth';
 import { ListExpenses, AddExpenseForm, OverviewExpenses } from './components/expenses';
 import Navbar from './components/navbar/Navbar';
 
@@ -55,10 +55,11 @@ class App extends React.Component {
     if (this.state.loggedInUser) {
       return (
         <div className='App'>
-          <Navbar />
-          <div className="logout">
-            <Logout userInSession={this.state.loggedInUser} getUser={this.getTheUser} />
-          </div>
+          <Route path='/signup' render={() => <Redirect to='/'></Redirect>} />
+          <Route path='/login' render={() => <Redirect to='/'></Redirect>} />
+          <Navbar
+            userInSession={this.state.loggedInUser}
+            getUser={this.getTheUser} />
           <OverviewExpenses
             currentFilter={this.state.currentFilter}
             listOfTodayExpenses={this.state.listOfTodayExpenses}
@@ -75,8 +76,6 @@ class App extends React.Component {
                 getTodayExpenses={this.getTodayExpenses}
                 currentFilter={this.state.currentFilter}
               />} />
-            <Route path='/signup' render={() => <Redirect to='/'></Redirect>} />
-            <Route path='/login' render={() => <Redirect to='/'></Redirect>} />
             <Route exact path='/expenses' render={() =>
               <ListExpenses
                 listOfExpenses={this.state.listOfExpenses}
@@ -91,6 +90,9 @@ class App extends React.Component {
     } else {
       return (
         <div className='App'>
+          <Navbar
+            userInSession={this.state.loggedInUser}
+            getUser={this.getTheUser} />
           <Switch>
             <Route exact path='/' component={UnloggedHome} />
             <Route exact path='/signup' render={() => <Signup getUser={this.getTheUser} />} />

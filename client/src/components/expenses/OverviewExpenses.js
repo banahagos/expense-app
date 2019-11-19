@@ -17,6 +17,7 @@ class OverviewExpenses extends React.Component {
             <Link name='?filter=lastmonth' onClick={this.handleFilterOnClick} className={this.props.currentFilter === '?filter=lastmonth' ? 'is-active' : ''} >Last month</Link>
           </p>
         </nav>
+        <Link to="/expenses">
         <div className="tile is-child notification is-primary overview-expenses-box">
           <div className="overview-expenses">
             <div className="overview-expenses-left">
@@ -41,6 +42,7 @@ class OverviewExpenses extends React.Component {
             </div>
           </div>
         </div>
+        </Link>
       </div>
     )
   }

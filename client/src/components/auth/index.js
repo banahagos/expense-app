@@ -1,7 +1,9 @@
 import Login from './Login';
 import Signup from './Signup';
-import Logout from './Logout';
+import AuthService from './AuthService';
 
 export {
-  Login, Signup, Logout
+  Login, 
+  Signup, 
+  AuthService,
 }

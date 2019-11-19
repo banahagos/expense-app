@@ -31,14 +31,9 @@ code {
   margin: 0px;
 }
 
-.filter-btn{
-  margin-top: 20px;
-}
 
-.logout{
-  display: flex;
-  justify-content: flex-end;
-  margin: 0px;
+.auth-btn{
+  margin: 5px;
 }
 
 

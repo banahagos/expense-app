@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { EditExpenseForm, ListItem } from './'
 
 class ListExpenses extends React.Component {
@@ -65,17 +65,9 @@ class ListExpenses extends React.Component {
   }
 
   render() {
-    if (this.props.isLoading) {
-      return <div>Is loading...</div>
-    }
     return (
       <div>
-        <Link to='/'>Dashboard</Link>
-        <br />
         <Link to='/new-expense'>Add new expense</Link>
-        <br />
-
-
         <br />
         {this.props.listOfExpenses.map(e => {
           return (
