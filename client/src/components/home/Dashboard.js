@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Chart from './Chart';
 
 class Dashboard extends React.Component {
 
@@ -15,6 +16,7 @@ class Dashboard extends React.Component {
     return (
       <div>
         <Link to='/new-expense'>Add new expense</Link>
+        <Chart listOfExpenses={this.props.listOfExpenses}/>
       </div>
     )
   }

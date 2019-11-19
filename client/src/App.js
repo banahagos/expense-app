@@ -75,6 +75,7 @@ class App extends React.Component {
                 getExpenses={this.getExpenses}
                 getTodayExpenses={this.getTodayExpenses}
                 currentFilter={this.state.currentFilter}
+                listOfExpenses={this.state.listOfExpenses}
               />} />
             <Route exact path='/expenses' render={() =>
               <ListExpenses
