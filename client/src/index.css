@@ -1,6 +1,6 @@
 body {
   /* background-color: #222746; */
-  margin: 0;
+  margin: 0px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -35,6 +35,16 @@ code {
 .auth-btn{
   margin: 5px;
 }
+
+.charts-container {
+  height:40vh;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+
+
 
 
 

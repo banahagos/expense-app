@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Chart from './Chart';
+import { ExpensesByPeriodChart, TopPayeeChart, TopCategoryChart } from './charts'
 
 class Dashboard extends React.Component {
 
@@ -14,9 +14,13 @@ class Dashboard extends React.Component {
       return <div>...loading</div>
     }
     return (
-      <div>
+      <div >
         <Link to='/new-expense'>Add new expense</Link>
-        <Chart listOfExpenses={this.props.listOfExpenses}/>
+        <div className="charts-container">
+          <ExpensesByPeriodChart listOfExpenses={this.props.listOfExpenses} />
+          <TopPayeeChart listOfExpenses={this.props.listOfExpenses} />
+          <TopCategoryChart listOfExpenses={this.props.listOfExpenses} />
+        </div>
       </div>
     )
   }
