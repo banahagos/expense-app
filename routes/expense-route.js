@@ -19,7 +19,7 @@ router.get('/expenses/', async (req, res, next) => {
 
   try {
     if (req.query.filter) {
-      const filterExpenseList = await Expense.find({ owner: req.user, dateOfExpense: { $gt: dateRange } })
+      const filterExpenseList = await Expense.find({ owner: req.user, dateOfExpense: { $gt: dateRange , $lt: Date.now()} })
         .sort({ created: -1 })
       res.json(filterExpenseList)
     } else {
@@ -38,8 +38,10 @@ router.get('/expenses/', async (req, res, next) => {
 router.get('/today', async (req, res, next) => {
   const today = startOfDay(Date.now())
 
+  console.log(startOfDay(Date.now()))
+
   try {
-    const todayExpenses = await Expense.find({ owner: req.user, dateOfExpense: { $gte: today } })
+    const todayExpenses = await Expense.find({ owner: req.user, dateOfExpense: { $gte: today, $lt: Date.now()}})
     res.json(todayExpenses)
   }
   catch (err) {
@@ -51,7 +53,7 @@ router.get('/today', async (req, res, next) => {
 router.post('/new-expense', (req, res, next) => {
   const { amount, category, dateOfExpense, monthlyRecurring } = req.body
 
-  const payee = req.body.payee.toUpperCase()
+  const payee = req.body.payee.toLowerCase()
 
   if (!payee || !amount || !category || !dateOfExpense) {
     res.status(400).json({ message: 'Please fill out all fields' });
@@ -90,7 +92,7 @@ router.post('/new-expense', (req, res, next) => {
 // PUT route => to update a specific expense
 router.put('/expenses/:id', (req, res, next) => {
   const { category, amount, dateOfExpense, monthlyRecurring } = req.body
-  const payee = req.body.payee.toUpperCase()
+  const payee = req.body.payee.toLowerCase()
 
   if (!payee || !amount || !category || !dateOfExpense) {
     res.status(400).json({ message: 'Please fill out all fields' });

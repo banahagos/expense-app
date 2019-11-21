@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pie } from 'react-chartjs-2';
+import { Radar } from 'react-chartjs-2';
 
 const TopCategoryChart = props => {
 
@@ -18,18 +18,22 @@ const TopCategoryChart = props => {
 
   return (
     <div className="chart">
-      <Pie
+      <Radar
         data={{
           labels: values.map(entry => entry[0]),
           datasets: [
             {
-              label: 'Top Categories',
-              data: values.map(entry => entry[1])
+              label: 'Expenses per category',
+              data: values.map(entry => entry[1]),
+              backgroundColor: [
+                'rgba(255,51,102,0.1)',
+              ],
             }
           ]
         }}
         options={{
-          maintainAspectRatio: false
+          maintainAspectRatio: false,
+          
         }}
 
       />

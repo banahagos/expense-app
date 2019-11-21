@@ -1,10 +1,13 @@
 import React from 'react'
 import { Line } from 'react-chartjs-2';
-import { compareAsc, format, parseISO } from 'date-fns';
+import { compareAsc, format, parseISO, subDays, startOfDay } from 'date-fns';
 
 const ExpensesByPeriodChart = props => {
-  // const numDays = 7;
+  const numDays = 8;
   // new Map((new Array(numDays)).map((_, index) => [subDays(Date.now(), numDays - index - 1), 0]))
+  const xLabels = [...Array(numDays)].map((_, index) => [startOfDay(subDays(Date.now(), numDays - index - 1)), 0])
+  console.log(xLabels)
+
   const expenses = new Map();
   for (let expense of props.listOfExpenses) {
     const current = expenses.get(expense.dateOfExpense);
@@ -17,7 +20,7 @@ const ExpensesByPeriodChart = props => {
   const values = [...expenses.entries()].sort((a, b) => {
     return compareAsc(parseISO(a[0]), parseISO(b[0]));
   });
-  
+
   return (
     <div className="chart">
       <Line
@@ -26,12 +29,29 @@ const ExpensesByPeriodChart = props => {
           datasets: [
             {
               label: 'Expenses',
-              data: values.map(entry => entry[1]) 
+              data: values.map(entry => entry[1]),
+              backgroundColor: [
+                'rgba(255,51,102,0.1)',
+              ],
+              lineTension: 0.4,
+              borderColor: [
+                'rgba(255,51,102,1)',
+              ],
+              borderWidth: 1
             }
           ]
         }}
         options={{
-          maintainAspectRatio: false
+          maintainAspectRatio: false,
+          scales: {
+            yAxes: [{
+              ticks: {
+                callback: function (value, index, values) {
+                  return '€' + value;
+                }
+              }
+            }],
+          }
         }}
 
       />

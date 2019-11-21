@@ -19,16 +19,32 @@ const TopPayeeChart = props => {
     <div className="chart">
       <Bar
         data={{
-          labels: values.map(entry => entry[0]),
+          labels: values.map(entry => entry[0]).slice(0,5),
           datasets: [
             {
               label: 'Top Payees',
-              data: values.map(entry => entry[1])
+              data: values.map(entry => entry[1]).slice(0,5),
+              backgroundColor: [
+                'rgba(255,51,102,0.1)',
+                'rgba(255,51,102,0.1)',
+                'rgba(255,51,102,0.1)',
+                'rgba(255,51,102,0.1)',
+                'rgba(255,51,102,0.1)',
+              ],
             }
           ]
         }}
         options={{
-          maintainAspectRatio: false
+          maintainAspectRatio: false,
+          scales: {
+            yAxes: [{
+              ticks: {
+                callback: function (value, index, values) {
+                  return '€' + value;
+                }
+              }
+            }],
+          }
         }}
 
       />
