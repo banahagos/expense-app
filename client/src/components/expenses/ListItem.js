@@ -1,25 +1,25 @@
 import React from 'react';
 import Moment from 'react-moment';
 
-
 const ListItem = props => {
   return (
-    <div className="tile is-parent">
-      <div className="tile is-child notification list-item has-text-grey" id={props.id}>
-        <div className="list-item-left">
-          <p className="subtitle">{props.payee}</p>
-          <p><Moment format="DD/MM/YYYY">{props.dateOfExpense}</Moment></p>
+    <div className="list-group">
+      <button id={props.id} onClick={props.onClick} type="button" className="list-group-item list-group-item-action">
+        <div className="list-content">
+          <span>{props.payee}</span>
+          <small className="text-muted">{props.category}</small>
+          <small className="text-muted"><Moment format="DD/MM/YYYY">{props.dateOfExpense}</Moment></small>
         </div>
-        <div className="list-item-right">
-          <p className="subtitle">{props.amount}€</p>
-          <span className="tag is-light">{props.category}</span>
+        <div className="list-content">
+          <h5>{props.amount}<sup>€</sup></h5>
         </div>
-      </div>
+      </button>
     </div>
   )
 }
 
 export default ListItem;
+
 
 
 

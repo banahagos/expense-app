@@ -5,6 +5,7 @@ import { Dashboard, UnloggedHome } from './components/home'
 import { Login, Signup } from './components/auth';
 import { ListExpenses, AddExpenseForm, OverviewExpenses } from './components/expenses';
 import Navbar from './components/navbar/Navbar';
+import FilterTab from './components/expenses/FilterTab'
 
 
 class App extends React.Component {
@@ -60,12 +61,16 @@ class App extends React.Component {
           <Navbar
             userInSession={this.state.loggedInUser}
             getUser={this.getTheUser} />
-          <OverviewExpenses
+            {/* <FilterTab 
+            currentFilter={this.state.currentFilter} 
+            getExpenses={this.getExpenses}
+            /> */}
+          {/* <OverviewExpenses
             currentFilter={this.state.currentFilter}
             listOfTodayExpenses={this.state.listOfTodayExpenses}
             listOfExpenses={this.state.listOfExpenses}
             getExpenses={this.getExpenses}
-          />
+          /> */}
           <Switch>
             <Route exact path='/' render={() =>
               <Dashboard
@@ -76,6 +81,7 @@ class App extends React.Component {
                 getTodayExpenses={this.getTodayExpenses}
                 currentFilter={this.state.currentFilter}
                 listOfExpenses={this.state.listOfExpenses}
+                listOfTodayExpenses={this.state.listOfTodayExpenses}
               />} />
             <Route exact path='/expenses' render={() =>
               <ListExpenses

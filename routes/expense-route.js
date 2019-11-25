@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const { startOfDay, subWeeks, subMonths } = require('date-fns');
 
 
+
 // GET route => get expenses (filter by dates  or all)
 router.get('/expenses/', async (req, res, next) => {
   const lastWeek = startOfDay(subWeeks(Date.now(), 1));
@@ -43,8 +44,7 @@ router.get('/today', async (req, res, next) => {
   try {
     const todayExpenses = await Expense.find({ owner: req.user, dateOfExpense: { $gte: today, $lt: Date.now()}})
     res.json(todayExpenses)
-  }
-  catch (err) {
+  } catch (err) {
     res.json(err)
   }
 })

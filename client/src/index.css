@@ -1,6 +1,7 @@
 body {
-  /* background-color: #222746; */
+  background-color: #222746;
   margin: 0px;
+  color: #F2F2F2;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -12,15 +13,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-.App {
-  padding: 20px;
-  margin: 20px;
-}
 
-.list-item{
-  display: flex;
-  justify-content: space-between;
-  cursor: pointer;
+.App {
+  margin: 10px 20px 20px 20px;
+  padding: 10px 20px 20px 20px;
 }
 
 .overview-expenses {
@@ -33,15 +29,135 @@ code {
 
 
 .auth-btn{
-  margin: 5px;
+ background-color: #FF3366;
+ border: none;
+}
+
+.auth-btn:hover {
+  background-color: #fa285c;
+  border: none;
 }
 
 .charts-container {
-  height:40vh;
+  height:60vh;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
 }
+
+.list-group-item-action{
+  background-color: #242A52;
+  color: #F2F2F2;
+}
+
+.badge-pill{
+  background-color: #FF3366;
+}
+
+.list-group-item{
+  display: flex;
+  justify-content: space-between;
+}
+
+.list-group :hover {
+  background-color: #222746;
+  color:#F2F2F2;
+}
+
+.list-content{
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-link {
+  color: #F2F2F2;
+}
+
+.nav-link:hover {
+ color: #F2F2F2
+}
+
+.nav-pills {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 15px;
+}
+
+.nav-pills .nav-link.active {
+  background-color: #FF3366;
+  margin-bottom: 10px;
+}
+/* 
+.page-title{
+  color:#F2F2F2;
+}
+
+
+.bgc {
+  background-color: #242A52;
+  margin: 15px;
+}
+
+.top{
+  height: 40vh;
+}
+
+.top-half{
+  height: 15vh;
+}
+
+.bottom-charts{
+  height: 60vh;
+}
+
+.bottom-dashboard {
+  display: flex;
+  justify-content: space-between;
+} */
+
+/* .dashboard-boxes{
+  display: flex;
+  justify-content: space-between;
+} */
+
+
+
+.navbar-expand-lg{
+  display: flex;
+  justify-content: space-between;
+}
+
+.settings{
+  width: 20px;
+  height: 20px;
+}
+
+.navbar-brand{
+  color: #F2F2F2;
+  font-weight: bold;
+}
+
+.navbar-brand:hover {
+  color: #F2F2F2;
+}
+
+.expense-card {
+  background-color: #242A52;
+  margin: 10px 10px 10px 0px;
+}
+
+.overview-expenses-link{
+  text-decoration: none
+}
+
+.chart {
+  background-color: #242A52;
+}
+
+
+
+
+
 
 
 

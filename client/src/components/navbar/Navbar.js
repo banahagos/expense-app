@@ -19,60 +19,17 @@ class Navbar extends React.Component {
 
   render() {
     return (
-      <nav className="navbar" role="navigation" aria-label="main navigation">
-        <div className="navbar-brand">
-          <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
-        </div>
-
-        <div id="navbarBasicExample" className="navbar-menu">
-          <div className="navbar-start">
-
-            <NavLink to="/" className="navbar-item">
-              {this.props.userInSession ? 'Dashboard' : 'Home'}
-            </NavLink>
-
-            {/* <NavLink to="/expenses" className="navbar-item">
-            Expenses
-              </NavLink> */}
-            <div className="navbar-item has-dropdown is-hoverable">
-              <a className="navbar-link">
-                More
-                </a>
-              <div className="navbar-dropdown">
-                <a className="navbar-item">
-                  About
-                  </a>
-                <a className="navbar-item">
-                  Jobs
-                  </a>
-                <a className="navbar-item">
-                  Contact
-                  </a>
-                <hr className="navbar-divider" />
-                <a className="navbar-item">
-                  Report an issue
-                  </a>
-              </div>
-            </div>
-          </div>
-          <div className="navbar-end">
-            <div className="navbar-item">
-              <div>{this.props.userInSession ? <NavLink to='/'><button className="button primary" onClick={() => this.logoutUser()}>Logout</button></NavLink> : ''}</div>
-              <div>{!this.props.userInSession ? <NavLink to="/login"><button className="button is-primary auth-btn">Login</button></NavLink> : ''}</div>
-              <div>{!this.props.userInSession ? <NavLink to="/Signup"><button className="button is-primary auth-btn">Sign Up</button></NavLink> : ''}</div>
-            </div>
-          </div>
+      <nav className="navbar">
+        <NavLink to="/" className="navbar-brand">DASHBOARD</NavLink>
+        <div className="form-inline">
+          {this.props.userInSession ? <img src="/settings.png" className="settings" /> : ''}
+          {/* <div>{this.props.userInSession ? <NavLink to='/'><button className="btn btn-primary auth-btn" onClick={() => this.logoutUser()}>Logout</button></NavLink> : ''}</div> */}
+          <div>{!this.props.userInSession ? <NavLink to="/login"><button className="btn btn-primary auth-btn">Login</button></NavLink> : ''}</div>
+          <div>{!this.props.userInSession ? <NavLink to="/Signup"><button className="btn btn-primary auth-btn">Sign Up</button></NavLink> : ''}</div>
         </div>
       </nav>
-
     )
   }
 }
-
-
 
 export default Navbar;

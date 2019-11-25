@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bar } from 'react-chartjs-2';
+import { Bubble } from 'react-chartjs-2';
 
 const TopPayeeChart = props => {
   const expenses = new Map();
@@ -17,7 +17,7 @@ const TopPayeeChart = props => {
   
   return (
     <div className="chart">
-      <Bar
+      <Bubble
         data={{
           labels: values.map(entry => entry[0]).slice(0,5),
           datasets: [

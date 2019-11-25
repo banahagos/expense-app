@@ -1,7 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { EditExpenseForm, ListItem } from './'
+import { EditExpenseForm, ListItem } from './';
+import FilterTab from './FilterTab';
+
 
 class ListExpenses extends React.Component {
   constructor(props) {
@@ -14,6 +16,7 @@ class ListExpenses extends React.Component {
   }
 
   showEditFormOfSpecificExpense = e => {
+    console.log(e.target)
     this.setState({
       editExpenseId: e.target.id,
       isEditFormVisible: true,
@@ -69,32 +72,41 @@ class ListExpenses extends React.Component {
       <div>
         <Link to='/new-expense'>Add new expense</Link>
         <br />
+        <FilterTab
+          currentFilter={this.props.currentFilter}
+          getExpenses={this.props.getExpenses}
+        />
         {this.props.listOfExpenses.map(e => {
           return (
             <div key={e._id}>
-              <div onClick={this.showEditFormOfSpecificExpense}>
-                <ListItem
-                  payee={e.payee}
-                  amount={e.amount}
-                  dateOfExpense={e.dateOfExpense}
-                  category={e.category}
-                  id={e._id}
-                />
-              </div>
-              {this.state.editExpenseId === e._id && this.state.isEditFormVisible ?
-                <EditExpenseForm
-                  id={e._id}
-                  payee={e.payee}
-                  amount={e.amount}
-                  category={e.category}
-                  dateOfExpense={e.dateOfExpense}
-                  monthlyRecurring={e.monthlyRecurring}
-                  updateExpense={this.updateExpense}
-                  errMsg={this.state.errMsg}
-                  deleteExpense={this.deleteExpense}
-                /> : ''
+              <ul className="list-group" key={e._id}>
+                <div>
+                  <ListItem
+                    payee={e.payee}
+                    amount={e.amount}
+                    dateOfExpense={e.dateOfExpense}
+                    category={e.category}
+                    id={e._id}
+                    onClick={this.showEditFormOfSpecificExpense}
+                  />
+                </div>
+              </ul>
+              {
+                this.state.editExpenseId === e._id && this.state.isEditFormVisible ?
+                  <EditExpenseForm
+                    id={e._id}
+                    payee={e.payee}
+                    amount={e.amount}
+                    category={e.category}
+                    dateOfExpense={e.dateOfExpense}
+                    monthlyRecurring={e.monthlyRecurring}
+                    updateExpense={this.updateExpense}
+                    errMsg={this.state.errMsg}
+                    deleteExpense={this.deleteExpense}
+                  /> : ''
               }
             </div>
+
           )
         }
         )

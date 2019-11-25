@@ -1,6 +1,6 @@
 import React from 'react'
 import { Line } from 'react-chartjs-2';
-import { compareAsc, format, parseISO, subDays, startOfDay } from 'date-fns';
+import { compareAsc, format, parseISO, subDays, startOfDay, isWithinInterval } from 'date-fns';
 
 const ExpensesByPeriodChart = props => {
   const numDays = 8;
@@ -22,8 +22,14 @@ const ExpensesByPeriodChart = props => {
   });
 
   return (
-    <div className="chart">
-      <Line
+    //chart card mb-6 col-xs-12  col-sm-12  col-md-6
+    <div className="chart card mb-6 col-xs-12  col-sm-12  col-md-6">
+      <div className="card-header chart-header">
+        <h6>Expenses and Income</h6>
+      </div>
+      <div className="card-body">
+      <article className="charts-container">
+      <Line 
         data={{
           labels: values.map(entry => format(parseISO(entry[0]), 'MMM do')),
           datasets: [
@@ -31,7 +37,7 @@ const ExpensesByPeriodChart = props => {
               label: 'Expenses',
               data: values.map(entry => entry[1]),
               backgroundColor: [
-                'rgba(255,51,102,0.1)',
+                'rgba(255,51,102,0.03)',
               ],
               lineTension: 0.4,
               borderColor: [
@@ -42,19 +48,40 @@ const ExpensesByPeriodChart = props => {
           ]
         }}
         options={{
+          legend: {
+            labels: {
+                fontColor: "white",
+                fontSize: 11
+            }
+        },
           maintainAspectRatio: false,
           scales: {
             yAxes: [{
               ticks: {
                 callback: function (value, index, values) {
                   return '€' + value;
-                }
-              }
+                },
+                fontColor: "#F2F2F2",
+              },
+              gridLines: {
+                color: 'rgba(242, 242, 242,0.1)',
+            }
             }],
+            xAxes: [{
+              ticks: {
+                fontColor: "#F2F2F2"
+              },
+              gridLines: {
+                display: false,
+            }
+              },
+            ],
           }
         }}
 
       />
+      </article>
+      </div>
     </div>
   )
 
