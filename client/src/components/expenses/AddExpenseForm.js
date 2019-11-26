@@ -29,7 +29,10 @@ class AddExpenseForm extends Component {
           monthlyRecurring: false,
           errMsg: null
         })
-        this.props.history.push('/expenses')
+
+        // this.props.history.push('/expenses')
+        this.props.getExpenses('')
+
       })
       .catch(error => {
         console.log("somethimg weng wrong with adding an expense,", error)
@@ -43,10 +46,10 @@ class AddExpenseForm extends Component {
     this.setState({ [name]: value });
   }
 
-  handleCheckboxChange = e => {
-    const { checked } = e.target
-    this.setState({ monthlyRecurring: checked });
-  }
+  // handleCheckboxChange = e => {
+  //   const { checked } = e.target
+  //   this.setState({ monthlyRecurring: checked });
+  // }
 
   render() {
     return (
@@ -56,9 +59,9 @@ class AddExpenseForm extends Component {
           <input name='amount' type='number' value={this.state.amount} onChange={e => this.handleInputChange(e)} placeholder='Amount' />
           <input name='category' type='text' value={this.state.category} onChange={e => this.handleInputChange(e)} placeholder='Category' />
           <input name='dateOfExpense' type='date' value={this.state.dateOfExpense} onChange={e => this.handleInputChange(e)} placeholder='Date' />
-          <input type='checkbox' name='monthlyRecurring' onChange={e => this.handleCheckboxChange(e)} />
-          <label>Monthly recurring</label>
-          <button type='submit'>Submit</button>
+          {/* <input type='checkbox' name='monthlyRecurring' onChange={e => this.handleCheckboxChange(e)} /> */}
+          {/* <label>Monthly recurring</label> */}
+          <button type='submit'>Add new expense</button>
         </form>
         {this.state.errMsg ? this.state.errMsg : ''}
       </div>

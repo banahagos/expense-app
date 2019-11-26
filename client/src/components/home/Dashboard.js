@@ -45,7 +45,7 @@ class Dashboard extends React.Component {
         </div>
         <div className="row">
           <TopCategoryChart listOfExpenses={this.props.listOfExpenses} />
-          <ExpensesByPeriodChart listOfExpenses={this.props.listOfExpenses} />
+          {/* <ExpensesByPeriodChart listOfExpenses={this.props.listOfExpenses} /> */}
         </div>
       </div>
 

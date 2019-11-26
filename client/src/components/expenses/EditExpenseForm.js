@@ -5,25 +5,24 @@ class EditExpenseForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      payee: this.props.payee,
-      amount: this.props.amount,
-      category: this.props.category,
-      dateOfExpense: this.props.dateOfExpense,
-      monthlyRecurring: this.props.monthlyRecurring,
+      payee: this.props.prefill.payee,
+      amount: this.props.prefill.amount,
+      category: this.props.prefill.category,
+      dateOfExpense: this.props.prefill.dateOfExpense,
     };
   }
 
   handleFormSubmit = e => {
     e.preventDefault();
-    const { payee, category, dateOfExpense, monthlyRecurring } = this.state
+    const { payee, category, dateOfExpense } = this.state
     const amount = parseFloat(this.state.amount)
     this.props.updateExpense({
       payee,
       amount,
       category,
       dateOfExpense,
-      monthlyRecurring
     })
+    this.props.handleAddFormVisibility()
   }
 
   handleInputChange = e => {
@@ -37,19 +36,18 @@ class EditExpenseForm extends Component {
   }
 
   render() {
+    console.log(this.state.dateOfExpense)
     return (
       <div>
         <form onSubmit={this.handleFormSubmit} name="isAddFormVisible">
           <input type='text' name='payee' value={this.state.payee} onChange={e => this.handleInputChange(e)} placeholder='Payee' />
           <input name='amount' type='number' value={this.state.amount} onChange={e => this.handleInputChange(e)} placeholder='Amount' />
           <input name='category' type='text' value={this.state.category} onChange={e => this.handleInputChange(e)} placeholder='Category' />
-          <input name='dateOfExpense' type='date' value={this.state.dateOfExpense.slice(0, 10)} onChange={e => this.handleInputChange(e)} placeholder='Date' />
-          <input type='checkbox' name='monthlyRecurring' onChange={e => this.handleCheckboxChange(e)} />
-          <label>Monthly recurring</label>
+          <input name='dateOfExpense' type='date' onChange={e => this.handleInputChange(e)} value={this.state.dateOfExpense} placeholder='Date' />
           <button type='submit'>Save</button>
         </form>
         {this.props.errMsg ? this.props.errMsg : ''}
-        <button id={this.props.id} onClick={this.props.deleteExpense}>Delete</button>
+        <button onClick={this.props.deleteExpense}>Delete</button>
       </div>
     )
   }

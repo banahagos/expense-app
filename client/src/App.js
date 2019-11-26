@@ -1,11 +1,14 @@
 import React from 'react';
+
 import { Redirect, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 import { Dashboard, UnloggedHome } from './components/home'
 import { Login, Signup } from './components/auth';
 import { ListExpenses, AddExpenseForm, OverviewExpenses } from './components/expenses';
 import Navbar from './components/navbar/Navbar';
-import FilterTab from './components/expenses/FilterTab'
+import ExpensesApp from './visualizations/ExpensesApp';
+import * as d3 from 'd3';
+import _ from 'lodash';
 
 
 class App extends React.Component {
@@ -13,11 +16,13 @@ class App extends React.Component {
     super(props)
     this.state = {
       loggedInUser: this.props.user,
-      listOfExpenses: [],
+      expenses: [],
       listOfTodayExpenses: [],
-      currentFilter: '?filter=lastweek',
+      currentFilter: '',
       isTodayExpensesLoading: true,
       isListOfExpensesLoading: true,
+      selectedWeek: d3.timeWeek.floor(new Date()),
+      
     };
   }
 
@@ -34,7 +39,7 @@ class App extends React.Component {
     axios.get(`/api/expenses/${filter}`)
       .then((responseFromApi) => {
         this.setState({
-          listOfExpenses: responseFromApi.data,
+          expenses: responseFromApi.data,
           isListOfExpensesLoading: false
         })
       })
@@ -52,6 +57,14 @@ class App extends React.Component {
       .catch(error => console.log(error))
   }
 
+  getSelectedWeek = (selectedWeek) => {
+    this.setState({selectedWeek: selectedWeek})
+  }
+
+  componentDidMount() {
+    this.getExpenses(this.state.currentFilter)
+  }
+
   render() {
     if (this.state.loggedInUser) {
       return (
@@ -61,16 +74,6 @@ class App extends React.Component {
           <Navbar
             userInSession={this.state.loggedInUser}
             getUser={this.getTheUser} />
-            {/* <FilterTab 
-            currentFilter={this.state.currentFilter} 
-            getExpenses={this.getExpenses}
-            /> */}
-          {/* <OverviewExpenses
-            currentFilter={this.state.currentFilter}
-            listOfTodayExpenses={this.state.listOfTodayExpenses}
-            listOfExpenses={this.state.listOfExpenses}
-            getExpenses={this.getExpenses}
-          /> */}
           <Switch>
             <Route exact path='/' render={() =>
               <Dashboard
@@ -80,16 +83,24 @@ class App extends React.Component {
                 getExpenses={this.getExpenses}
                 getTodayExpenses={this.getTodayExpenses}
                 currentFilter={this.state.currentFilter}
-                listOfExpenses={this.state.listOfExpenses}
+                listOfExpenses={this.state.expenses}
                 listOfTodayExpenses={this.state.listOfTodayExpenses}
               />} />
             <Route exact path='/expenses' render={() =>
+              <ExpensesApp
+                expenses={this.state.expenses}
+                selectedWeek={this.state.selectedWeek}
+                getSelectedWeek={this.getSelectedWeek}
+                getExpenses={this.getExpenses}
+              />} />
+
+            {/* <Route exact path='/expenses' render={() =>
               <ListExpenses
                 listOfExpenses={this.state.listOfExpenses}
                 getExpenses={this.getExpenses}
                 currentFilter={this.state.currentFilter}
                 getTodayExpenses={this.getTodayExpenses}
-              />} />
+              />} /> */}
             <Route path='/new-expense' component={AddExpenseForm} />
           </Switch>
         </div>
