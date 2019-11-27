@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import * as d3 from 'd3';
 import _ from 'lodash';
 
-const height = 650; 
-const dayWidth = 55; 
-const dayHeight = 75; 
-const margin = { left: 40, top: 20, right: 40, bottom: 20 }; 
+const height = 650;
+const dayWidth = 55;
+const dayHeight = 75;
+const margin = { left: 40, top: 20, right: 40, bottom: 20 };
 const topPadding = 150;
 const radius = 8;
-const fontSize = 14; 
+const fontSize = 14;
 
 // d3 functions
 const xScale = d3.scaleLinear().domain([0, 6]);
@@ -31,11 +31,11 @@ class App extends Component {
   // }
 
   // componentWillMount() {
-    // xScale.range([margin.left, this.props.width - margin.right]);
-    // simulation.on('tick', this.forceTick);
-    // drag.on('start', this.dragStart)
-    //   .on('drag', this.dragExpense)
-    //   .on('end', this.dragEnd);
+  // xScale.range([margin.left, this.props.width - margin.right]);
+  // simulation.on('tick', this.forceTick);
+  // drag.on('start', this.dragStart)
+  //   .on('drag', this.dragExpense)
+  //   .on('end', this.dragEnd);
   // }
 
   componentDidMount() {
@@ -79,7 +79,7 @@ class App extends Component {
     const amountExtent = d3.extent(this.props.expenses, d => d.amount);
     amountScale.domain(amountExtent);
 
-  
+
     this.expenses = _.chain(this.props.expenses)
       .groupBy(d => d3.timeWeek.floor(new Date(d.dateOfExpense)))
       .filter((d) => d3.timeWeek.floor(new Date(d[0].dateOfExpense)).getTime() === this.props.selectedWeek.getTime())
@@ -97,22 +97,22 @@ class App extends Component {
           });
         });
       }).flatten().value()
-     
 
-      // .map((expenses, week) => {
-      //   week = new Date(week);
-      //   return _.map(expenses, exp => {
-      //     const { x, y } = this.calculateDayPosition(new Date(exp.dateOfExpense), true);
-      //     return Object.assign(exp, {
-      //       radius: amountScale(exp.amount),
-      //       focusX: x,
-      //       focusY: y,
-      //       x: exp.x || x,
-      //       y: exp.y || y,
-      //       dateOfExpense: new Date(exp.dateOfExpense)
-      //     });
-      //   });
-      // }).flatten().value()
+
+    // .map((expenses, week) => {
+    //   week = new Date(week);
+    //   return _.map(expenses, exp => {
+    //     const { x, y } = this.calculateDayPosition(new Date(exp.dateOfExpense), true);
+    //     return Object.assign(exp, {
+    //       radius: amountScale(exp.amount),
+    //       focusX: x,
+    //       focusY: y,
+    //       x: exp.x || x,
+    //       y: exp.y || y,
+    //       dateOfExpense: new Date(exp.dateOfExpense)
+    //     });
+    //   });
+    // }).flatten().value()
 
     // get min+max dates
 
@@ -133,8 +133,8 @@ class App extends Component {
     const week = d3.timeWeek.floor(date);
     const x = xScale(dayOfWeek);
     let y = yScale(week) + height + 2 * dayHeight;
-    
-    
+
+
     if (shouldSelectedWeekCurve &&
       week.getTime() === this.props.selectedWeek.getTime()) {
       const offset = Math.abs(3 - dayOfWeek);
@@ -146,25 +146,13 @@ class App extends Component {
   }
 
   renderCircles = () => {
-    // draw expenses circles
-
-    const selectedExpenses = _.chain(this.expenses)
-      .groupBy(d => d3.timeWeek.floor(new Date(d.dateOfExpense)))
-      .value()
-
-    const select = selectedExpenses[this.props.selectedWeek]
-   
-     
+    // draw expenses circles   
     this.circles = this.container.selectAll('.expense')
-      .data(this.expenses, d => d.payee);
-     
-
-   
-      
+      .data(this.expenses, d => d._id);
 
     // exit
     this.circles.exit().remove();
-    
+
     // enter+update
     this.circles = this.circles.enter().append('circle')
       .classed('expense', true)
@@ -184,58 +172,58 @@ class App extends Component {
       .attr('cy', d => d.y);
   }
 
-  dragStart = () => {
-    this.dragging = true;
-    this.hover.style('display', 'none')
+  // dragStart = () => {
+  //   this.dragging = true;
+  //   this.hover.style('display', 'none')
 
-    simulation.alphaTarget(0.3).restart();
-    d3.event.subject.fx = d3.event.subject.x;
-    d3.event.subject.fy = d3.event.subject.y;
-  }
+  //   simulation.alphaTarget(0.3).restart();
+  //   d3.event.subject.fx = d3.event.subject.x;
+  //   d3.event.subject.fy = d3.event.subject.y;
+  // }
 
-  dragExpense = () => {
-    this.dragged = null;
+  // dragExpense = () => {
+  //   this.dragged = null;
 
-    d3.event.subject.fx = d3.event.x;
-    d3.event.subject.fy = d3.event.y;
+  //   d3.event.subject.fx = d3.event.x;
+  //   d3.event.subject.fy = d3.event.y;
 
-    const expense = d3.event.subject;
-    const expenseX = d3.event.x;
-    const expenseY = d3.event.y;
-    // go through all categories to see if overlapping
-    _.each(this.props.categories, category => {
-      const { x, y, radius } = category;
-      if (x - radius < expenseX && expenseX < x + radius &&
-        y - radius < expenseY && expenseY < y + radius) {
-        this.dragged = { expense, category, type: 'category' };
-      }
-    });
-    // go through all the days to see if expense overlaps
-    _.each(this.days, day => {
-      const { x, y } = day;
-      if (x - dayWidth < expenseX && expenseX < x + dayWidth &&
-        y - dayHeight < expenseY && expenseY < y + dayHeight) {
-        this.dragged = { expense, day, type: 'day' };
-      }
-    });
-  }
+  //   const expense = d3.event.subject;
+  //   const expenseX = d3.event.x;
+  //   const expenseY = d3.event.y;
+  //   // go through all categories to see if overlapping
+  //   _.each(this.props.categories, category => {
+  //     const { x, y, radius } = category;
+  //     if (x - radius < expenseX && expenseX < x + radius &&
+  //       y - radius < expenseY && expenseY < y + radius) {
+  //       this.dragged = { expense, category, type: 'category' };
+  //     }
+  //   });
+  //   // go through all the days to see if expense overlaps
+  //   _.each(this.days, day => {
+  //     const { x, y } = day;
+  //     if (x - dayWidth < expenseX && expenseX < x + dayWidth &&
+  //       y - dayHeight < expenseY && expenseY < y + dayHeight) {
+  //       this.dragged = { expense, day, type: 'day' };
+  //     }
+  //   });
+  // }
 
-  dragEnd = () => {
-    if (!d3.event.active) simulation.alphaTarget(0);
-    d3.event.subject.fx = null;
-    d3.event.subject.fy = null;
+  // dragEnd = () => {
+  //   if (!d3.event.active) simulation.alphaTarget(0);
+  //   d3.event.subject.fx = null;
+  //   d3.event.subject.fy = null;
 
-    if (this.dragged) {
-      const { expense, category, day } = this.dragged;
-      if (this.dragged.type === 'category') {
-        this.props.linkToCategory(expense, category);
-      } else if (this.dragged.type === 'day') {
-        this.props.editDate(expense, day);
-      }
-    }
-    this.dragged = null;
-    this.dragging = false;
-  }
+  //   if (this.dragged) {
+  //     const { expense, category, day } = this.dragged;
+  //     if (this.dragged.type === 'category') {
+  //       this.props.linkToCategory(expense, category);
+  //     } else if (this.dragged.type === 'day') {
+  //       this.props.editDate(expense, day);
+  //     }
+  //   }
+  //   this.dragged = null;
+  //   this.dragging = false;
+  // }
 
   mouseOver = (d) => {
     if (this.dragging) return;
@@ -250,9 +238,9 @@ class App extends Component {
       .attr('width', width + 6)
       .attr('x', -width / 2 - 3);
 
-      this.props.getEditObject(d)
-      this.props.handleEditFormVisibility()
-      
+    this.props.getEditObject(d)
+    this.props.handleEditFormVisibility()
+
   }
 
   render() {

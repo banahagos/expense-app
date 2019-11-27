@@ -18,16 +18,6 @@ const colorScale = chroma.scale(['rgba(83,195,172,0.8)', 'rgba(247, 232, 131, 0.
 
 class Day extends Component {
 
-  // constructor(props) {
-  //   super(props);
-
-  //   this.state = {};
-  // }
-
-  // componentWillMount() {
-  //   xScale.range([margin.left, this.props.width - margin.right]);
-  // }
-
   componentDidMount() {
     xScale.range([margin.left, this.props.width - margin.right]);
     this.container = d3.select(this.refs.container);
@@ -45,8 +35,6 @@ class Day extends Component {
     // const weeksExtent = d3.extent(this.props.expenses,
     //   d => d3.timeWeek.floor(new Date(d.dateOfExpense)));
     // yScale.domain(weeksExtent);
-  
-
 
     this.totalsByDay = _.chain(this.props.expenses)
       .groupBy(d => d3.timeDay.floor(new Date(d.dateOfExpense))) // all expenses of a day are grouped by this day

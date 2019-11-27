@@ -31,7 +31,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // this.props.getExpenses('')
+   
   }
 
   handleEditFormVisibility = () => {

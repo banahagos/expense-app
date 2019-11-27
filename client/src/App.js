@@ -22,7 +22,7 @@ class App extends React.Component {
       isTodayExpensesLoading: true,
       isListOfExpensesLoading: true,
       selectedWeek: d3.timeWeek.floor(new Date()),
-      
+
     };
   }
 
@@ -58,7 +58,7 @@ class App extends React.Component {
   }
 
   getSelectedWeek = (selectedWeek) => {
-    this.setState({selectedWeek: selectedWeek})
+    this.setState({ selectedWeek: selectedWeek })
   }
 
   componentDidMount() {
@@ -83,7 +83,7 @@ class App extends React.Component {
                 getExpenses={this.getExpenses}
                 getTodayExpenses={this.getTodayExpenses}
                 currentFilter={this.state.currentFilter}
-                listOfExpenses={this.state.expenses}
+                expenses={this.state.expenses}
                 listOfTodayExpenses={this.state.listOfTodayExpenses}
               />} />
             <Route exact path='/expenses' render={() =>

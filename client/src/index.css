@@ -1,5 +1,5 @@
 body {
-  background-color: #222746;
+  /* background-color: #222746; */
   margin: 0px;
   color: #F2F2F2;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -142,7 +142,7 @@ code {
 }
 
 .expense-card {
-  background-color: #242A52;
+  background-color: rgba(83,195,172);
   margin: 10px 10px 10px 0px;
 }
 
@@ -154,6 +154,10 @@ code {
   background-color: #242A52;
 }
 
+.dash-viz{
+  display: flex;
+  flex-wrap: wrap;
+}
 
 
 
