@@ -15,13 +15,12 @@ let colorScale = chroma.scale(['rgba(83,195,172,0.8)', 'rgba(247, 232, 131, 0.8)
 let amountScale = d3.scaleLog()
 const simulation = d3.forceSimulation()
   .force("charge", d3.forceManyBody().strength(-100).distanceMin(100).distanceMax(200))
-  .force("link", d3.forceLink().id(function (d) { return d.index }))
+  // .force("link", d3.forceLink().id(function (d) { return d.index }))
   .force("center", d3.forceCenter(width / 2, height / 2))
   .force("y", d3.forceY(0.001))
   .force("x", d3.forceX(0.001))
   
               
-
 // // .force('charge', d3.forceManyBody(-1))
 // .force('collide', d3.forceCollide(radius))
 
@@ -31,13 +30,16 @@ class BubbleChart extends Component {
 
   componentDidMount() {
     this.container = d3.select(this.refs.container)
+
+    let amountExtent = d3.extent(this.props.expenses, d => d.amount)
+    amountScale.domain(amountExtent)
+
     this.renderCircles();
     // this.renderLinks()
     simulation.on('tick', this.forceTick)
     simulation.nodes(this.props.expenses).alpha(0.9).restart()
 
-    let amountExtent = d3.extent(this.props.expenses, d => d.amount)
-    amountScale.domain(amountExtent)
+
 
     // this.container = d3.select(this.refs.container).append('g');
     this.hover = d3.select(this.refs.container).append('g');
@@ -55,13 +57,13 @@ class BubbleChart extends Component {
   }
 
   componentDidUpdate() {
+    let amountExtent = d3.extent(this.props.expenses, d => d.amount)
+    amountScale.domain(amountExtent)
+
     this.renderCircles();
     // this.renderLinks()
     simulation.on('tick', this.forceTick)
     simulation.nodes(this.props.expenses).alpha(0.9).restart()
-
-    let amountExtent = d3.extent(this.props.expenses, d => d.amount)
-    amountScale.domain(amountExtent)
   }
 
 
