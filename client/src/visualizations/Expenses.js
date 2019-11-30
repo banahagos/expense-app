@@ -23,20 +23,7 @@ const simulation = d3.forceSimulation()
   .stop();
 const drag = d3.drag();
 
-class App extends Component {
-
-  // constructor(props) {
-  //   super(props);
-
-  // }
-
-  // componentWillMount() {
-  // xScale.range([margin.left, this.props.width - margin.right]);
-  // simulation.on('tick', this.forceTick);
-  // drag.on('start', this.dragStart)
-  //   .on('drag', this.dragExpense)
-  //   .on('end', this.dragEnd);
-  // }
+class Expenses extends Component {
 
   componentDidMount() {
     xScale.range([margin.left, this.props.width - margin.right]);
@@ -82,7 +69,7 @@ class App extends Component {
 
     this.expenses = _.chain(this.props.expenses)
       .groupBy(d => d3.timeWeek.floor(new Date(d.dateOfExpense)))
-      .filter((d) => d3.timeWeek.floor(new Date(d[0].dateOfExpense)).getTime() === this.props.selectedWeek.getTime())
+      // .filter((d) => d3.timeWeek.floor(new Date(d[0].dateOfExpense)).getTime() === this.props.selectedWeek.getTime())
       .map((expenses, week) => {
         week = new Date(week);
         return _.map(expenses, exp => {
@@ -250,4 +237,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Expenses;

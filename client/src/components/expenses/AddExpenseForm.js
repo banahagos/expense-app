@@ -35,7 +35,7 @@ class AddExpenseForm extends Component {
 
       })
       .catch(error => {
-        console.log("somethimg weng wrong with adding an expense,", error)
+        console.log("something weng wrong with adding an expense,", error)
         this.setState({ errMsg: error.response.data.message })
 
       })
@@ -53,15 +53,15 @@ class AddExpenseForm extends Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleFormSubmit}>
+      <div className="expense-form">
+        <form onSubmit={this.handleFormSubmit} >
           <input type='text' name='payee' value={this.state.payee} onChange={e => this.handleInputChange(e)} placeholder='Payee' />
           <input name='amount' type='number' value={this.state.amount} onChange={e => this.handleInputChange(e)} placeholder='Amount' />
           <input name='category' type='text' value={this.state.category} onChange={e => this.handleInputChange(e)} placeholder='Category' />
           <input name='dateOfExpense' type='date' value={this.state.dateOfExpense} onChange={e => this.handleInputChange(e)} placeholder='Date' />
           {/* <input type='checkbox' name='monthlyRecurring' onChange={e => this.handleCheckboxChange(e)} /> */}
           {/* <label>Monthly recurring</label> */}
-          <button type='submit'>Add new expense</button>
+          <button type='submit' className="expense-btn btn btn-primary">Add new</button>
         </form>
         {this.state.errMsg ? this.state.errMsg : ''}
       </div>

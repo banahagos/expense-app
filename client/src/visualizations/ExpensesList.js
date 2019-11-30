@@ -26,7 +26,8 @@ class App extends Component {
     this.state = {
       isEditFormVisible: false,
       isAddNewFormVisible: true,
-      prefillEditForm: {}
+      prefillEditForm: {},
+      errMsg: null
     };
   }
 
@@ -131,11 +132,11 @@ class App extends Component {
 
     return (
       <div className='App' style={style} >
-        <h2 style={{ textAlign: 'center', color: colors.black }}>
+        <h3 style={{ textAlign: 'center', color: colors.black }}>
           <span style={{ cursor: 'pointer' }} onClick={this.prevWeek}>← </span>
           Week of {selectedWeek}
           <span style={{ cursor: 'pointer' }} onClick={this.nextWeek}> →</span>
-        </h2>
+        </h3>
         {this.state.isAddNewFormVisible && <AddExpenseForm getExpenses={this.props.getExpenses} />}
         {this.state.isEditFormVisible && <EditExpenseForm 
         prefill={this.state.prefillEditForm}

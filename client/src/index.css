@@ -142,7 +142,7 @@ code {
 }
 
 .expense-card {
-  background-color: rgba(83,195,172);
+  background-color: rgb(83,195,172);
   margin: 10px 10px 10px 0px;
   color: white;
   height: 125px
@@ -162,7 +162,42 @@ code {
   flex-wrap: wrap;
 }
 
+.delete-icon{
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
 
+input{
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(83,195,172);
+  width: 50vw;
+  padding: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column
+}
+
+.expense-btn{
+  width: 50vw;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  background-color: rgba(83,195,172);
+  border: rgba(83,195,172);
+}
+
+.expense-form{
+  display: flex;
+  justify-content: center;
+}
+
+.expense-btn:hover {
+  background-color: rgba(83,195,172);
+}
 
 
 

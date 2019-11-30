@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 
+
 class EditExpenseForm extends Component {
   constructor(props) {
     super(props);
@@ -36,18 +37,17 @@ class EditExpenseForm extends Component {
   }
 
   render() {
-    console.log(this.state.dateOfExpense)
     return (
-      <div>
+      <div className="expense-form">
         <form onSubmit={this.handleFormSubmit} name="isAddFormVisible">
           <input type='text' name='payee' value={this.state.payee} onChange={e => this.handleInputChange(e)} placeholder='Payee' />
           <input name='amount' type='number' value={this.state.amount} onChange={e => this.handleInputChange(e)} placeholder='Amount' />
           <input name='category' type='text' value={this.state.category} onChange={e => this.handleInputChange(e)} placeholder='Category' />
-          <input name='dateOfExpense' type='date' onChange={e => this.handleInputChange(e)} value={this.state.dateOfExpense} placeholder='Date' />
-          <button type='submit'>Save</button>
+          <input name='dateOfExpense' type='date' onChange={e => this.handleInputChange(e)} />
+          <button type='submit' className="expense-btn btn btn-primary">Save</button>
         </form>
+        <img src="/trash.png" className="delete-icon" onClick={this.props.deleteExpense} />
         {this.props.errMsg ? this.props.errMsg : ''}
-        <button onClick={this.props.deleteExpense}>Delete</button>
       </div>
     )
   }

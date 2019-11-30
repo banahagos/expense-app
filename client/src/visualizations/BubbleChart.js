@@ -40,7 +40,6 @@ class BubbleChart extends Component {
     simulation.nodes(this.props.expenses).alpha(0.9).restart()
 
 
-
     // this.container = d3.select(this.refs.container).append('g');
     this.hover = d3.select(this.refs.container).append('g');
     this.hover.append('rect')
@@ -68,7 +67,7 @@ class BubbleChart extends Component {
 
 
   renderCircles = () => {
-    // draw payee circles  
+    // draw circles  
     this.circles = this.container.selectAll('circle')
       .data(this.props.expenses, d => d.payee)
                  
