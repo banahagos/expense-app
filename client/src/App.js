@@ -6,9 +6,9 @@ import { Dashboard, UnloggedHome } from './components/home'
 import { Login, Signup } from './components/auth';
 import { ListExpenses, AddExpenseForm, OverviewExpenses } from './components/expenses';
 import Navbar from './components/navbar/Navbar';
-import ExpensesApp from './visualizations/ExpensesApp';
 import * as d3 from 'd3';
 import _ from 'lodash';
+import ExpensesList from './visualizations/ExpensesList';
 
 
 class App extends React.Component {
@@ -63,6 +63,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getExpenses(this.state.currentFilter)
+    this.getTodayExpenses()
   }
 
   render() {
@@ -87,7 +88,7 @@ class App extends React.Component {
                 listOfTodayExpenses={this.state.listOfTodayExpenses}
               />} />
             <Route exact path='/expenses' render={() =>
-              <ExpensesApp
+              <ExpensesList
                 expenses={this.state.expenses}
                 selectedWeek={this.state.selectedWeek}
                 getSelectedWeek={this.getSelectedWeek}

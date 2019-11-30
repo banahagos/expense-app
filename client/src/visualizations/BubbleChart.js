@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
 import _ from 'lodash';
-import chroma from 'chroma-js'
+import chroma from 'chroma-js';
+
 
 const height = 450;
 const width = 450;
@@ -13,16 +14,25 @@ const fontSize = 14;
 let colorScale = chroma.scale(['rgba(83,195,172,0.8)', 'rgba(247, 232, 131, 0.8)', 'rgba(232,81,120,0.8)'])
 let amountScale = d3.scaleLog()
 const simulation = d3.forceSimulation()
-  .force('center', d3.forceCenter(width / 2, height / 2))
-  .force('charge', d3.forceManyBody(-10))
-  .force('collide', d3.forceCollide(radius))
-  .stop()
+  .force("charge", d3.forceManyBody().strength(-100).distanceMin(100).distanceMax(200))
+  .force("link", d3.forceLink().id(function (d) { return d.index }))
+  .force("center", d3.forceCenter(width / 2, height / 2))
+  .force("y", d3.forceY(0.001))
+  .force("x", d3.forceX(0.001))
+  
+              
+
+// // .force('charge', d3.forceManyBody(-1))
+// .force('collide', d3.forceCollide(radius))
+
+
 
 class BubbleChart extends Component {
 
   componentDidMount() {
     this.container = d3.select(this.refs.container)
     this.renderCircles();
+    // this.renderLinks()
     simulation.on('tick', this.forceTick)
     simulation.nodes(this.props.expenses).alpha(0.9).restart()
 
@@ -46,6 +56,7 @@ class BubbleChart extends Component {
 
   componentDidUpdate() {
     this.renderCircles();
+    // this.renderLinks()
     simulation.on('tick', this.forceTick)
     simulation.nodes(this.props.expenses).alpha(0.9).restart()
 
@@ -58,6 +69,7 @@ class BubbleChart extends Component {
     // draw payee circles  
     this.circles = this.container.selectAll('circle')
       .data(this.props.expenses, d => d.payee)
+                 
 
     // exit
     this.circles.exit().remove();
@@ -67,60 +79,77 @@ class BubbleChart extends Component {
       .merge(this.circles)
       .attr('r', radius)
       .attr('fill', d => colorScale(amountScale(d.amount)))
+      .attr('class', 'transaction')
       .on('mouseover', this.mouseOver)
+      .on('mouseleave', () => this.hover.style('display', 'none'))
+      .style('cursor', 'move')
+      .call(d3.drag()
+      .on("start", this.dragstarted)
+      .on("drag", this.dragged)
+      .on("end", this.dragended));
   }
 
   mouseOver = (d) => {
     this.hover.style('display', 'block');
 
     const { x, y, payee, amount } = d;
-    this.hover.attr('transform', 'translate(' + [x, y + d.radius + fontSize] + ')');
+    // this.hover.attr('transform', 'translate(' + [x, y + d.radius + fontSize] + ')');
     this.hover.select('text')
       .text(_.map(payee.split(' '), _.capitalize).join(' ') + " " + amount + "€")
     const width = this.hover.select('text').node().getBoundingClientRect().width;
     this.hover.select('rect')
       .attr('width', width + 6)
       .attr('x', -width / 2 - 3);
+  }
 
 
+  // renderLinks = () => {
+  //   // draw the links
+  //   this.links = this.container.selectAll('.link')
+  //     .data(this.props.expenses, d => d.payee)
+
+  //    // exit
+  //    this.links.exit().remove();
+
+  //    this.links = this.links.enter().append('line')
+  //    .merge(this.links)
+  //    .attr("class", "link")
+  // }
+
+
+  dragstarted = (d) => {
+    if (!d3.event.active) simulation.alphaTarget(0.5).restart();
+    d.fx = d.x;
+    d.fy = d.y;
+  }
+
+  dragged = (d) => {
+    d.fx = d3.event.x;
+    d.fy = d3.event.y;
+  }
+
+  dragended = (d) => {
+    if (!d3.event.active) simulation.alphaTarget(0.5);
+    d.fx = null;
+    d.fy = null;
   }
 
   forceTick = () => {
     this.circles.attr('cx', d => d.x)
       .attr('cy', d => d.y)
+
+      // this.links.attr('cx', d => d.x)
+      // .attr('cy', d => d.y)
+
   }
-
-  getTotalPayee = () => {
-    const expenses = new Map();
-    for (let expense of this.props.expenses) {
-      const current = expenses.get(expense.payee);
-      if (typeof current !== 'undefined') {
-        expenses.set(expense.payee, current + expense.amount);
-      } else {
-        expenses.set(expense.payee, expense.amount);
-      }
-    }
-    const values = [...expenses.entries()].sort((a, b) => {
-      return b[1] - a[1];
-    });
-
-    const valuesObj = values.map(e => {
-      return { payee: e[0], amount: e[1] }
-    })
-    return valuesObj
-  }
-
-
-
-  // getExtent = () => {
-  //   const amountExtent = d3.extent(this.getTotalPayee(), d => d.amount)
-  //   colorScale.domain(amountExtent)
-  // }
 
 
   render() {
     return (
-      <svg width={width} height={height} ref='container' />
+      <div>
+        <h5>Transactions</h5>
+        <svg width={width} height={height} ref='container' />
+      </div>
     );
   }
 }

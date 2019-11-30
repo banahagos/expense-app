@@ -1,6 +1,11 @@
 import React from 'react';
 import FilterTab from '../expenses/FilterTab';
 import BubbleChart from '../../visualizations/BubbleChart';
+import BubbleCategory from '../../visualizations/BubbleCategory';
+import { Link } from 'react-router-dom';
+
+
+
 
 import {
   ExpensesByPeriodChart,
@@ -23,6 +28,7 @@ class Dashboard extends React.Component {
     }
     return (
       <div>
+         <Link to="/expenses">Add new expense</Link>
         <FilterTab
           currentFilter={this.props.currentFilter}
           getExpenses={this.props.getExpenses}
@@ -33,11 +39,21 @@ class Dashboard extends React.Component {
           expenses={this.props.expenses}
           getExpenses={this.props.getExpenses}
         />
+
         <div className="dash-viz">
-        <BubbleChart 
-        expenses={this.props.expenses}
-         />
-        {/* <svg></svg> */}
+            {/* <BubbleChart
+              expenses={this.props.expenses}
+            /> */}
+           
+           <BubbleChart 
+            expenses={this.props.expenses}
+            />
+            
+            <BubbleCategory
+              expenses={this.props.expenses}
+            />
+
+            
         </div>
       </div>
 
@@ -46,6 +62,7 @@ class Dashboard extends React.Component {
 }
 
 export default Dashboard;
+
 
 // <div className="dashboard-boxes row">
 //           <OverviewExpenses

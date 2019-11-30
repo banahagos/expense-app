@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 import _ from 'lodash';
 
 const height = 650;
-const dayWidth = 55;
+// const dayWidth = 55;
 const dayHeight = 75;
 const margin = { left: 40, top: 20, right: 40, bottom: 20 };
 const topPadding = 150;
@@ -156,7 +156,7 @@ class App extends Component {
     // enter+update
     this.circles = this.circles.enter().append('circle')
       .classed('expense', true)
-      .attr('id', this.props.expenses._id) // testing 
+      .attr('id', this.props.expenses._id) 
       .attr('fill', this.props.colors.white)
       .style('cursor', 'move')
       .call(drag)

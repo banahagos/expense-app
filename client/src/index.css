@@ -1,7 +1,7 @@
 body {
   /* background-color: #222746; */
   margin: 0px;
-  color: #F2F2F2;
+  color: lightgrey;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -70,7 +70,7 @@ code {
 }
 
 .nav-link {
-  color: #F2F2F2;
+  color: lightgrey;
 }
 
 .nav-link:hover {
@@ -133,7 +133,7 @@ code {
 }
 
 .navbar-brand{
-  color: #F2F2F2;
+  color: lightgrey;
   font-weight: bold;
 }
 
@@ -144,6 +144,8 @@ code {
 .expense-card {
   background-color: rgba(83,195,172);
   margin: 10px 10px 10px 0px;
+  color: white;
+  height: 125px
 }
 
 .overview-expenses-link{
@@ -154,8 +156,9 @@ code {
   background-color: #242A52;
 }
 
-.dash-viz{
+.dash-viz {
   display: flex;
+  justify-content: space-around;
   flex-wrap: wrap;
 }
 

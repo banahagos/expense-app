@@ -12,9 +12,9 @@ import axios from 'axios';
 
 
 
-// var width = 750; // 750 width of the app
-var height = 1800; // height of the app
-var colors = {
+// const width = 750; // 750 width of the app
+const height = 1800; // height of the app
+const colors = {
   white: '#fff8fa', //color of the expense circles
   gray: '#e1ecea', //categories and empty day card
   black: '#516561', // headline, category text input field
@@ -31,7 +31,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-   
+    this.props.getExpenses('')
   }
 
   handleEditFormVisibility = () => {
@@ -101,12 +101,12 @@ class App extends Component {
 
 
   render() {
-    var selectedWeek = d3.timeFormat('%B %d, %Y')(this.props.selectedWeek);
-    var style = {
+    let selectedWeek = d3.timeFormat('%B %d, %Y')(this.props.selectedWeek);
+    const style = {
       width: this.props.parentWidth,
       margin: 'auto',
     }
-    var svgStyle = {
+    const svgStyle = {
       overflow: 'visible',
       position: 'absolute',
       top: 0,
@@ -115,19 +115,8 @@ class App extends Component {
       zIndex: -1,
 
     }
-    // var inputStyle = {
-    //   fontSize: 14,
-    //   textAlign: 'center',
-    //   display: 'block',
-    //   padding: 5,
-    //   width: 200,
-    //   margin: 'auto',
-    //   background: 'none',
-    //   color: colors.black,
-    //   border: 'none',
-    //   borderBottom: '2px solid ' + colors.black,
-    // }
-    var props = {
+
+    const props = {
       width: this.props.parentWidth,
       colors,
       // linkToCategory: this.linkToCategory,
@@ -142,11 +131,11 @@ class App extends Component {
 
     return (
       <div className='App' style={style} >
-        <h1 style={{ textAlign: 'center', color: colors.black }}>
+        <h2 style={{ textAlign: 'center', color: colors.black }}>
           <span style={{ cursor: 'pointer' }} onClick={this.prevWeek}>← </span>
           Week of {selectedWeek}
           <span style={{ cursor: 'pointer' }} onClick={this.nextWeek}> →</span>
-        </h1>
+        </h2>
         {this.state.isAddNewFormVisible && <AddExpenseForm getExpenses={this.props.getExpenses} />}
         {this.state.isEditFormVisible && <EditExpenseForm 
         prefill={this.state.prefillEditForm}

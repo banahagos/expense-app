@@ -17,11 +17,11 @@ const TopCategoryChart = props => {
   });
 
   return (
-    <div className="chart card mb-6 col-xs-12  col-sm-12  col-md-6">
-      <div className="card-header">
+    <div className="chart card mb-12 col-xs-12 col-sm-12  col-md-6">
+      {/* <div className="card-header">
         <h6>Top Categories</h6>
-      </div>
-      <div className="card-body">
+      </div> */}
+      // <div className="card-body">
       <article className="charts-container">
         <Radar
           data={{
@@ -46,7 +46,7 @@ const TopCategoryChart = props => {
                 display: false
               },
               gridLines: {
-                color: 'rgba(242, 242, 242,0.1)',
+                color: 'lightgrey',
                 // color: ['black', 'red', 'orange', 'yellow', 'green', 'blue', 'indigo']
               }
             },

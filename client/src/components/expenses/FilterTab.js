@@ -18,10 +18,10 @@ class FilterTab extends React.Component {
           <Link onClick={this.handleFilterOnClick} className={this.props.currentFilter === '' ? 'nav-link active' : 'nav-link'}>All</Link>
         </li>
         <li className="nav-item">
-          <Link name='?filter=lastweek' onClick={this.handleFilterOnClick} className={this.props.currentFilter === '?filter=lastweek' ? 'nav-link active' : 'nav-link'}>Past week</Link>
+          <Link name='?filter=lastweek' onClick={this.handleFilterOnClick} className={this.props.currentFilter === '?filter=lastweek' ? 'nav-link active' : 'nav-link'}>Last 7 days</Link>
         </li>
         <li className="nav-item">
-          <Link name='?filter=lastmonth' onClick={this.handleFilterOnClick} className={this.props.currentFilter === '?filter=lastmonth' ? 'nav-link active' : 'nav-link'} >Past month</Link>
+          <Link name='?filter=lastmonth' onClick={this.handleFilterOnClick} className={this.props.currentFilter === '?filter=lastmonth' ? 'nav-link active' : 'nav-link'} >Last month</Link>
         </li>
       </ul>
     )
