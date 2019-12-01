@@ -2,11 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 class FilterTab extends React.Component {
-  constructor(props) {
-    super(props)
-
-  }
-
+  
   handleFilterOnClick = e => {
     this.props.getExpenses(e.target.name)
   }
@@ -15,13 +11,13 @@ class FilterTab extends React.Component {
     return (
       <ul className="nav nav-pills">
         <li className="nav-item">
-          <Link onClick={this.handleFilterOnClick} className={this.props.currentFilter === '' ? 'nav-link active' : 'nav-link'}>All</Link>
+          <Link to="/" onClick={this.handleFilterOnClick} className={this.props.currentFilter === '' ? 'nav-link active' : 'nav-link'}>All</Link>
         </li>
         <li className="nav-item">
-          <Link name='?filter=lastweek' onClick={this.handleFilterOnClick} className={this.props.currentFilter === '?filter=lastweek' ? 'nav-link active' : 'nav-link'}>Last 7 days</Link>
+          <Link to="/" name='?filter=lastweek' onClick={this.handleFilterOnClick} className={this.props.currentFilter === '?filter=lastweek' ? 'nav-link active' : 'nav-link'}>Last 7 days</Link>
         </li>
         <li className="nav-item">
-          <Link name='?filter=lastmonth' onClick={this.handleFilterOnClick} className={this.props.currentFilter === '?filter=lastmonth' ? 'nav-link active' : 'nav-link'} >Last month</Link>
+          <Link to="/" name='?filter=lastmonth' onClick={this.handleFilterOnClick} className={this.props.currentFilter === '?filter=lastmonth' ? 'nav-link active' : 'nav-link'} >Last month</Link>
         </li>
       </ul>
     )

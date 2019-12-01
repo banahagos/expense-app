@@ -93,7 +93,7 @@ class BubbleChart extends Component {
   mouseOver = (d) => {
     this.hover.style('display', 'block');
 
-    const { x, y, payee, amount } = d;
+    const { payee, amount } = d;
     // this.hover.attr('transform', 'translate(' + [x, y + d.radius + fontSize] + ')');
     this.hover.select('text')
       .text(_.map(payee.split(' '), _.capitalize).join(' ') + " " + amount + "€")

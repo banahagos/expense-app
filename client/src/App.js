@@ -2,12 +2,12 @@ import React from 'react';
 
 import { Redirect, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
-import { Dashboard, UnloggedHome } from './components/home'
+import Dashboard from './components/home/Dashboard'
+import UnloggedHome from './components/home/UnloggedHome'
 import { Login, Signup } from './components/auth';
-import { ListExpenses, AddExpenseForm, OverviewExpenses } from './components/expenses';
+import AddExpenseForm from './components/expenses/AddExpenseForm';
 import Navbar from './components/navbar/Navbar';
 import * as d3 from 'd3';
-import _ from 'lodash';
 import ExpensesList from './visualizations/ExpensesList';
 
 
@@ -94,14 +94,6 @@ class App extends React.Component {
                 getSelectedWeek={this.getSelectedWeek}
                 getExpenses={this.getExpenses}
               />} />
-
-            {/* <Route exact path='/expenses' render={() =>
-              <ListExpenses
-                listOfExpenses={this.state.listOfExpenses}
-                getExpenses={this.getExpenses}
-                currentFilter={this.state.currentFilter}
-                getTodayExpenses={this.getTodayExpenses}
-              />} /> */}
             <Route path='/new-expense' component={AddExpenseForm} />
           </Switch>
         </div>

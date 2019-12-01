@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AuthService from './AuthService';
 import { Link } from 'react-router-dom';
-import InputField from '../expenses/InputField'
+import InputField from './InputField';
 
 class Login extends Component {
   constructor(props) {
@@ -55,9 +55,9 @@ class Login extends Component {
             value={this.state.password}
             onChange={e => this.handleChange(e)}
           />
-          
+
           <button type="submit" className="btn btn-primary auth-form-btn">Login</button>
-   
+
         </form>
         {this.state.errMsg ? this.state.errMsg : ''}
         <p>Don't have account?

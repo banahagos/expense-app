@@ -92,7 +92,7 @@ class BubbleCategory extends Component {
   mouseOver = (d) => {
     this.hover.style('display', 'block');
 
-    const { x, y, category, amount } = d;
+    const {category, amount } = d;
     // this.hover.attr('transform', 'translate(' + [x, y + d.radius + fontSize] + ')');
     this.hover.select('text')
       .text(_.map(category.split(' '), _.capitalize).join(' ') + " " + amount + "€")

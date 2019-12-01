@@ -22,7 +22,7 @@ class Navbar extends React.Component {
       <nav className="navbar">
         {this.props.userInSession ? <NavLink to="/" className="navbar-brand">DASHBOARD</NavLink> : ''}
         <div className="form-inline">
-          {this.props.userInSession ? <img src="/settings.png" className="settings" /> : ''}
+          {this.props.userInSession ? <img src="/settings.png" alt="settings" className="settings" /> : ''}
           <div>{this.props.userInSession ? <NavLink to='/'><button className="btn btn-primary auth-btn" onClick={() => this.logoutUser()}>Logout</button></NavLink> : ''}</div>
         </div>
       </nav>

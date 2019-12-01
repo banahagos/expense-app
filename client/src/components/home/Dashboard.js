@@ -7,14 +7,7 @@ import { Link } from 'react-router-dom';
 
 
 
-import {
-  ExpensesByPeriodChart,
-  TopPayeeChart,
-  TopCategoryChart,
-  TransactionFrequency,
-  // AverageVsExpensesChart
-} from './charts'
-import { OverviewExpenses } from '../expenses';
+import  OverviewExpenses from '../expenses/OverviewExpenses';
 
 class Dashboard extends React.Component {
 

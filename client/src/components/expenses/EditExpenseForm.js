@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-
-
 class EditExpenseForm extends Component {
   constructor(props) {
     super(props);
@@ -42,7 +40,7 @@ class EditExpenseForm extends Component {
           <button type='submit' className="expense-btn btn btn-primary">Edit</button>
           {this.props.errMsg ? this.props.errMsg : ''}
         </form>
-        <img src="/trash.png" className="delete-icon" onClick={this.props.deleteExpense} />
+        <img src="/trash.png" alt="track-icon" className="delete-icon" onClick={this.props.deleteExpense} />
       </div>
     )
   }

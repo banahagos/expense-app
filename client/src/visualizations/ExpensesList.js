@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
 import * as d3 from 'd3';
-import _ from 'lodash';
 import Expenses from './Expenses';
 import Day from './Day';
 // import Categories from './Categories';

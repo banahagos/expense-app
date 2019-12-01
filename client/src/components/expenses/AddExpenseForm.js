@@ -29,8 +29,6 @@ class AddExpenseForm extends Component {
           monthlyRecurring: false,
           errMsg: null
         })
-
-        // this.props.history.push('/expenses')
         this.props.getExpenses('')
 
       })
