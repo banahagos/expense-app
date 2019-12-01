@@ -37,7 +37,6 @@ class AddExpenseForm extends Component {
       .catch(error => {
         console.log("something weng wrong with adding an expense,", error)
         this.setState({ errMsg: error.response.data.message })
-
       })
   }
 
@@ -46,24 +45,18 @@ class AddExpenseForm extends Component {
     this.setState({ [name]: value });
   }
 
-  // handleCheckboxChange = e => {
-  //   const { checked } = e.target
-  //   this.setState({ monthlyRecurring: checked });
-  // }
-
   render() {
     return (
       <div className="expense-form">
         <form onSubmit={this.handleFormSubmit} >
-          <input type='text' name='payee' value={this.state.payee} onChange={e => this.handleInputChange(e)} placeholder='Payee' />
-          <input name='amount' type='number' value={this.state.amount} onChange={e => this.handleInputChange(e)} placeholder='Amount' />
-          <input name='category' type='text' value={this.state.category} onChange={e => this.handleInputChange(e)} placeholder='Category' />
-          <input name='dateOfExpense' type='date' value={this.state.dateOfExpense} onChange={e => this.handleInputChange(e)} placeholder='Date' />
-          {/* <input type='checkbox' name='monthlyRecurring' onChange={e => this.handleCheckboxChange(e)} /> */}
-          {/* <label>Monthly recurring</label> */}
+          <input type='text' name='payee' value={this.state.payee} onChange={e => this.handleInputChange(e)} placeholder='Payee' className="expense-input" />
+          <input name='amount' type='number' value={this.state.amount} onChange={e => this.handleInputChange(e)} placeholder='Amount' className="expense-input" />
+          <input name='category' type='text' value={this.state.category} onChange={e => this.handleInputChange(e)} placeholder='Category' className="expense-input" />
+          <input name='dateOfExpense' type='date' value={this.state.dateOfExpense} onChange={e => this.handleInputChange(e)} placeholder='Date' className="expense-input" />
           <button type='submit' className="expense-btn btn btn-primary">Add new</button>
+          {this.state.errMsg ? this.state.errMsg : ''}
         </form>
-        {this.state.errMsg ? this.state.errMsg : ''}
+      
       </div>
     )
   }

@@ -7,7 +7,7 @@ const OverviewExpenses = props => {
   return (
     <div className="card expense-card w-100">
       <div className="card-body">
-        <h6 className="card-title">Total Expenses</h6>
+        {/* <h6 className="card-title">Total Expenses</h6> */}
         <div className="overview-expenses">
           <div className="overview-expenses-left">
             <div>

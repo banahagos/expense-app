@@ -31,6 +31,11 @@ code {
 .auth-btn{
  background-color: #FF3366;
  border: none;
+ margin: 5px;
+}
+
+.login-signup{
+  display: flex;
 }
 
 .auth-btn:hover {
@@ -168,12 +173,20 @@ code {
   height: 20px;
 }
 
-input{
+.expense-input {
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(83,195,172);
+  border-bottom: 1px solid rgba(83,195,172, 0.5);
   width: 50vw;
   padding: 10px;
+}
+
+::placeholder {
+  color:lightgrey
+}
+
+input[value]{
+  color:lightgrey
 }
 
 form {
@@ -198,6 +211,53 @@ form {
 .expense-btn:hover {
   background-color: rgba(83,195,172);
 }
+
+.fab {
+  width: 60px;
+  height: 60px;
+  background-color: #FF3366;
+  border-radius: 50%;
+  box-shadow: 0 6px 10px 0 #666;
+
+  font-size: 40px;
+  line-height: 55px;
+  color: white;
+  text-align: center;
+  
+  position: fixed;
+  right: 65px;
+  bottom: 100px;
+  
+ transition: all 0.1s ease-in-out;
+}
+
+.fab:hover {
+  box-shadow: 0 6px 14px 0 #666;
+  transform: scale(1.05);
+}
+
+.auth-form-btn{
+  background-color: rgba(83,195,172);
+  border:  rgba(83,195,172);
+}
+
+.auth-form-btn:hover{
+  background-color:rgba(83,195,172);
+  border:  rgba(83,195,172);
+}
+
+.auth-form{
+  width: 60vw;
+}
+
+.auth-link{
+  color: grey
+}
+
+.auth-link:hover{
+  color: grey
+}
+
 
 
 

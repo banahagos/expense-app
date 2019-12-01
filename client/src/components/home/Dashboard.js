@@ -28,7 +28,7 @@ class Dashboard extends React.Component {
     }
     return (
       <div>
-         <Link to="/expenses">Add new expense</Link>
+        <Link to="/expenses"><div className="fab"> + </div></Link>
         <FilterTab
           currentFilter={this.props.currentFilter}
           getExpenses={this.props.getExpenses}
@@ -41,19 +41,17 @@ class Dashboard extends React.Component {
         />
 
         <div className="dash-viz">
-            {/* <BubbleChart
+          {/* <BubbleChart
               expenses={this.props.expenses}
             /> */}
-           
-           <BubbleChart 
-            expenses={this.props.expenses}
-            />
-            
-            <BubbleCategory
-              expenses={this.props.expenses}
-            />
 
-            
+          <BubbleChart
+            expenses={this.props.expenses}
+          />
+
+          <BubbleCategory
+            expenses={this.props.expenses}
+          />
         </div>
       </div>
 

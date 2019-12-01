@@ -53,6 +53,7 @@ class App extends Component {
           errMsg: null
         })
         this.props.getExpenses('')
+        this.handleAddFormVisibility()
       })
       .catch(error => {
         console.log("something went wrong with edit", error)
@@ -141,8 +142,8 @@ class App extends Component {
         {this.state.isEditFormVisible && <EditExpenseForm 
         prefill={this.state.prefillEditForm}
         updateExpense={this.updateExpense}
-        handleAddFormVisibility={this.handleAddFormVisibility}
         deleteExpense={this.deleteExpense}
+        errMsg={this.state.errMsg}
         />}
         {/* <input id='addCategory' style={inputStyle} type='text' placeholder='Add Category'
           onFocus={this.startCategory} onBlur={this.clearCategory} onKeyDown={this.addCategory}></input> */}

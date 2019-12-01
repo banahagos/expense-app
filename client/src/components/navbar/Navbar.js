@@ -20,12 +20,10 @@ class Navbar extends React.Component {
   render() {
     return (
       <nav className="navbar">
-        <NavLink to="/" className="navbar-brand">DASHBOARD</NavLink>
+        {this.props.userInSession ? <NavLink to="/" className="navbar-brand">DASHBOARD</NavLink> : ''}
         <div className="form-inline">
           {this.props.userInSession ? <img src="/settings.png" className="settings" /> : ''}
           <div>{this.props.userInSession ? <NavLink to='/'><button className="btn btn-primary auth-btn" onClick={() => this.logoutUser()}>Logout</button></NavLink> : ''}</div>
-          <div>{!this.props.userInSession ? <NavLink to="/login"><button className="btn btn-primary auth-btn">Login</button></NavLink> : ''}</div>
-          <div>{!this.props.userInSession ? <NavLink to="/Signup"><button className="btn btn-primary auth-btn">Sign Up</button></NavLink> : ''}</div>
         </div>
       </nav>
     )

@@ -23,7 +23,6 @@ class EditExpenseForm extends Component {
       category,
       dateOfExpense,
     })
-    this.props.handleAddFormVisibility()
   }
 
   handleInputChange = e => {
@@ -31,23 +30,19 @@ class EditExpenseForm extends Component {
     this.setState({ [name]: value });
   }
 
-  handleCheckboxChange = e => {
-    const { checked } = e.target
-    this.setState({ monthlyRecurring: checked });
-  }
 
   render() {
     return (
       <div className="expense-form">
         <form onSubmit={this.handleFormSubmit} name="isAddFormVisible">
-          <input type='text' name='payee' value={this.state.payee} onChange={e => this.handleInputChange(e)} placeholder='Payee' />
-          <input name='amount' type='number' value={this.state.amount} onChange={e => this.handleInputChange(e)} placeholder='Amount' />
-          <input name='category' type='text' value={this.state.category} onChange={e => this.handleInputChange(e)} placeholder='Category' />
-          <input name='dateOfExpense' type='date' onChange={e => this.handleInputChange(e)} />
-          <button type='submit' className="expense-btn btn btn-primary">Save</button>
+          <input type='text' name='payee' value={this.state.payee} onChange={e => this.handleInputChange(e)} placeholder='Payee' className="expense-input" />
+          <input name='amount' type='number' value={this.state.amount} onChange={e => this.handleInputChange(e)} placeholder='Amount' className="expense-input" />
+          <input name='category' type='text' value={this.state.category} onChange={e => this.handleInputChange(e)} placeholder='Category' className="expense-input" />
+          <input name='dateOfExpense' type='date' value={this.state.dateOfExpense} onChange={e => this.handleInputChange(e)} className="expense-input" />
+          <button type='submit' className="expense-btn btn btn-primary">Edit</button>
+          {this.props.errMsg ? this.props.errMsg : ''}
         </form>
         <img src="/trash.png" className="delete-icon" onClick={this.props.deleteExpense} />
-        {this.props.errMsg ? this.props.errMsg : ''}
       </div>
     )
   }
