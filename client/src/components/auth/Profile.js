@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthService } from '../auth';
-import axios from 'axios'
+import axios from 'axios';
 
 
 class Profile extends Component {

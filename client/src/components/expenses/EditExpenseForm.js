@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import moment from 'moment';
+
 
 class EditExpenseForm extends Component {
   constructor(props) {
@@ -30,13 +32,16 @@ class EditExpenseForm extends Component {
 
 
   render() {
+    let newDateFormat = moment(this.state.dateOfExpense).toISOString()
+    let dateOfExpense =  newDateFormat.split('T')[0]
+   
     return (
       <div className="expense-form">
         <form onSubmit={this.handleFormSubmit} name="isAddFormVisible">
           <input type='text' name='payee' value={this.state.payee} onChange={e => this.handleInputChange(e)} placeholder='Payee' className="expense-input" />
           <input name='amount' type='number' value={this.state.amount} onChange={e => this.handleInputChange(e)} placeholder='Amount' className="expense-input" />
           <input name='category' type='text' value={this.state.category} onChange={e => this.handleInputChange(e)} placeholder='Category' className="expense-input" />
-          <input name='dateOfExpense' type='date' value={this.state.dateOfExpense} onChange={e => this.handleInputChange(e)} className="expense-input" />
+          <input name='dateOfExpense' type='date' value={dateOfExpense} onChange={e => this.handleInputChange(e)} className="expense-input" />
           <button type='submit' className="expense-btn btn btn-primary">Edit</button>
           {this.props.errMsg ? this.props.errMsg : ''}
         </form>

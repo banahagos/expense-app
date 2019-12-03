@@ -16,7 +16,7 @@ class Dashboard extends React.Component {
     if (this.props.isTodayExpensesLoading || this.props.isListOfExpensesLoading) {
       return <div>...loading</div>
     }
-    console.log(this.props.expenses)
+   
     return (
       <div>
         <div className="settings-box">
