@@ -73,22 +73,6 @@ router.post('/new-expense', (req, res, next) => {
 
 })
 
-// // Get route ==> get details of specific expense
-// router.get('/expenses/:id', async (req, res, next) => {
-//   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-//     res.status(400).json({ message: 'Specified id is not valid' });
-//     return;
-//   }
-
-//   try {
-//     const expense = await Expense.findOne({ owner: req.user, _id: req.params.id })
-//     res.json(expense)
-//   }
-//   catch (err) {
-//     res.json(err)
-//   }
-// })
-
 // PUT route => to update a specific expense
 router.put('/expenses/:id', (req, res, next) => {
   const { category, amount, dateOfExpense, monthlyRecurring } = req.body
@@ -106,7 +90,7 @@ router.put('/expenses/:id', (req, res, next) => {
     } else {
       Expense.findByIdAndUpdate(req.params.id, { payee, category, amount, dateOfExpense, monthlyRecurring })
         .then(() => {
-          res.json({ message: `Project with ${req.params.id} is updated successfully.` })
+          res.json({ message: `Expense with ${req.params.id} is updated successfully.` })
 
         })
         .catch(err => res.json(err))

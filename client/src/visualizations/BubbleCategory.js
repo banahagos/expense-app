@@ -110,7 +110,7 @@ class BubbleCategory extends Component {
   render() {
     return (
       <div>
-        <h5>Categories</h5>
+        <h5 style={{textAlign: 'center', padding: '10px'}}>Categories</h5>
         <svg width={width} height={height} ref='container' />
       </div>
     );

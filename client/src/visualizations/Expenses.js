@@ -149,6 +149,7 @@ class Expenses extends Component {
       .call(drag)
       .on('mouseover', this.mouseOver)
       .on('mouseleave', () => this.hover.style('display', 'none'))
+      .on('click', this.clickExpense )
       .merge(this.circles)
       .attr('r', d => d.radius)
       .attr('stroke', d => d.categories ? this.props.colors.black : '');
@@ -216,18 +217,19 @@ class Expenses extends Component {
     if (this.dragging) return;
     this.hover.style('display', 'block');
 
-    const { x, y, payee } = d;
+    const { x, y, payee, amount } = d;
     this.hover.attr('transform', 'translate(' + [x, y + d.radius + fontSize] + ')');
     this.hover.select('text')
-      .text(_.map(payee.split(' '), _.capitalize).join(' '));
+      .text(_.map(payee.split(' '), _.capitalize).join(' ') + " " + amount + "€");
     const width = this.hover.select('text').node().getBoundingClientRect().width;
     this.hover.select('rect')
       .attr('width', width + 6)
       .attr('x', -width / 2 - 3);
+  }
 
+  clickExpense = d => {
     this.props.getEditObject(d)
     this.props.handleEditFormVisibility()
-
   }
 
   render() {

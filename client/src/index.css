@@ -84,48 +84,14 @@ code {
 
 .nav-pills {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   padding-top: 15px;
 }
 
 .nav-pills .nav-link.active {
-  background-color: #FF3366;
+  background-color: #ffc38a;
   margin-bottom: 10px;
 }
-/* 
-.page-title{
-  color:#F2F2F2;
-}
-
-
-.bgc {
-  background-color: #242A52;
-  margin: 15px;
-}
-
-.top{
-  height: 40vh;
-}
-
-.top-half{
-  height: 15vh;
-}
-
-.bottom-charts{
-  height: 60vh;
-}
-
-.bottom-dashboard {
-  display: flex;
-  justify-content: space-between;
-} */
-
-/* .dashboard-boxes{
-  display: flex;
-  justify-content: space-between;
-} */
-
-
 
 .navbar-expand-lg{
   display: flex;
@@ -135,6 +101,11 @@ code {
 .settings{
   width: 20px;
   height: 20px;
+}
+
+.settings-box{
+  display: flex;
+  justify-content: flex-end;
 }
 
 .navbar-brand{
@@ -147,10 +118,11 @@ code {
 }
 
 .expense-card {
-  background-color: rgb(83,195,172);
+  background-color: #67ceab;
   margin: 10px 10px 10px 0px;
   color: white;
-  height: 125px
+  height: 125px;
+  border: #67ceab
 }
 
 .overview-expenses-link{
@@ -213,14 +185,14 @@ form {
 }
 
 .fab {
-  width: 60px;
-  height: 60px;
-  background-color: #FF3366;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(232,81,120);
   border-radius: 50%;
   box-shadow: 0 6px 10px 0 #666;
 
   font-size: 40px;
-  line-height: 55px;
+  line-height: 45px;
   color: white;
   text-align: center;
   
@@ -247,7 +219,14 @@ form {
 }
 
 .auth-form{
-  width: 60vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw
+}
+
+.form-control{
+  width: 50vw
 }
 
 .auth-link{
@@ -257,6 +236,9 @@ form {
 .auth-link:hover{
   color: grey
 }
+
+
+
 
 
 

@@ -148,7 +148,7 @@ class BubbleChart extends Component {
   render() {
     return (
       <div>
-        <h5>Transactions</h5>
+        <h5 style={{textAlign: 'center', padding: '10px'}}>Transactions</h5>
         <svg width={width} height={height} ref='container' />
       </div>
     );

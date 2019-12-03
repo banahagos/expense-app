@@ -3,23 +3,20 @@ import '../App.css';
 import * as d3 from 'd3';
 import Expenses from './Expenses';
 import Day from './Day';
-// import Categories from './Categories';
 import AddExpenseForm from '../components/expenses/AddExpenseForm';
 import ResponsiveWrapper from '../components/ResponsiveWrapper/ResponsiveWrapper';
 import EditExpenseForm from '../components/expenses/EditExpenseForm';
 import axios from 'axios';
 
 
-
-// const width = 750; // 750 width of the app
-const height = 1800; // height of the app
+const height = 800; 
 const colors = {
   white: '#fff8fa', //color of the expense circles
   gray: '#e1ecea', //categories and empty day card
   black: '#516561', // headline, category text input field
 };
 
-class App extends Component {
+class ExpensesList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -42,7 +39,7 @@ class App extends Component {
   }
 
   getEditObject = expenseObj => {
-    this.setState({prefillEditForm: expenseObj})
+    this.setState({ prefillEditForm: expenseObj })
   }
 
   updateExpense = expense => {
@@ -82,6 +79,12 @@ class App extends Component {
     })
   }
 
+  // handleFormVisibility = () => {
+  //   this.setState({
+  //     isAddNewFormVisible: !this.state.isAddNewFormVisible,
+  //   })
+  // }
+
   prevWeek = () => {
     // todo: error handling
     var selectedWeek = d3.timeWeek.offset(this.props.selectedWeek, -1);
@@ -95,10 +98,10 @@ class App extends Component {
   }
 
 
-  editDate = (expense, day) => {
-    expense.date = day.date;
-    this.forceUpdate();
-  }
+  // editDate = (expense, day) => {
+  //   expense.date = day.date;
+  //   this.forceUpdate();
+  // }
 
 
   render() {
@@ -137,16 +140,21 @@ class App extends Component {
           Week of {selectedWeek}
           <span style={{ cursor: 'pointer' }} onClick={this.nextWeek}> →</span>
         </h3>
-        {this.state.isAddNewFormVisible && <AddExpenseForm getExpenses={this.props.getExpenses} />}
-        {this.state.isEditFormVisible && <EditExpenseForm 
-        prefill={this.state.prefillEditForm}
-        updateExpense={this.updateExpense}
-        deleteExpense={this.deleteExpense}
-        errMsg={this.state.errMsg}
-        />}
+        {this.state.isAddNewFormVisible &&
+          <AddExpenseForm
+            getExpenses={this.props.getExpenses}
+            handleAddFormVisibility={this.handleAddFormVisibility}
+            getTodayExpenses={this.props.getTodayExpenses} />}
+
+        {this.state.isEditFormVisible &&
+          <EditExpenseForm
+            prefill={this.state.prefillEditForm}
+            updateExpense={this.updateExpense}
+            deleteExpense={this.deleteExpense}
+            errMsg={this.state.errMsg}
+          />}
         {/* <input id='addCategory' style={inputStyle} type='text' placeholder='Add Category'
           onFocus={this.startCategory} onBlur={this.clearCategory} onKeyDown={this.addCategory}></input> */}
-
         <svg style={svgStyle} >
           <Day {...props} {...this.state} />
           {/* <Categories {...props} {...this.state} /> */}
@@ -157,4 +165,4 @@ class App extends Component {
   }
 }
 
-export default ResponsiveWrapper(App);
+export default ResponsiveWrapper(ExpensesList);

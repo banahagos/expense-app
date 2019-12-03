@@ -30,6 +30,8 @@ class AddExpenseForm extends Component {
           errMsg: null
         })
         this.props.getExpenses('')
+        this.props.handleAddFormVisibility()
+        this.props.getTodayExpenses()
 
       })
       .catch(error => {

@@ -1,14 +1,13 @@
 import React from 'react';
-
 import { Redirect, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 import Dashboard from './components/home/Dashboard'
 import UnloggedHome from './components/home/UnloggedHome'
 import { Login, Signup } from './components/auth';
-import AddExpenseForm from './components/expenses/AddExpenseForm';
 import Navbar from './components/navbar/Navbar';
 import * as d3 from 'd3';
 import ExpensesList from './visualizations/ExpensesList';
+import Profile from './components/auth/Profile'
 
 
 class App extends React.Component {
@@ -93,8 +92,14 @@ class App extends React.Component {
                 selectedWeek={this.state.selectedWeek}
                 getSelectedWeek={this.getSelectedWeek}
                 getExpenses={this.getExpenses}
+                getTodayExpenses={this.getTodayExpenses}
               />} />
-            <Route path='/new-expense' component={AddExpenseForm} />
+            <Route exact path='/profile' render={() =>
+              <Profile
+                userInSession={this.state.loggedInUser}
+                getUser={this.getTheUser} 
+              />} />
+
           </Switch>
         </div>
       );

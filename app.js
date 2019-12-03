@@ -50,7 +50,7 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
 app.use('/api', expenseRouter);
 
