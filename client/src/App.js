@@ -7,7 +7,9 @@ import { Login, Signup } from './components/auth';
 import Navbar from './components/navbar/Navbar';
 import * as d3 from 'd3';
 import ExpensesList from './visualizations/ExpensesList';
-import Profile from './components/auth/Profile'
+import Profile from './components/auth/Profile';
+
+
 
 
 class App extends React.Component {
@@ -21,7 +23,6 @@ class App extends React.Component {
       isTodayExpensesLoading: true,
       isListOfExpensesLoading: true,
       selectedWeek: d3.timeWeek.floor(new Date()),
-
     };
   }
 
@@ -68,7 +69,8 @@ class App extends React.Component {
   render() {
     if (this.state.loggedInUser) {
       return (
-        <div className='App'>
+        <div className='App' style={{margin: '10px 20px 20px 20px',
+          padding: '10px 20px 20px 20px'}}>
           <Route path='/signup' render={() => <Redirect to='/'></Redirect>} />
           <Route path='/login' render={() => <Redirect to='/'></Redirect>} />
           <Navbar
@@ -97,7 +99,7 @@ class App extends React.Component {
             <Route exact path='/profile' render={() =>
               <Profile
                 userInSession={this.state.loggedInUser}
-                getUser={this.getTheUser} 
+                getUser={this.getTheUser}
               />} />
 
           </Switch>

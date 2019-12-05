@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthService } from '../auth';
 import axios from 'axios';
+import moment from 'moment'
 
 
 class Profile extends Component {
@@ -34,10 +35,26 @@ class Profile extends Component {
     return (
       <div className="auth-form">
         <h2>Profile</h2>
-        <p>Username: {this.props.userInSession.username}</p>
-        <p>Created: {this.props.userInSession.created}</p>
-        <Link to='/'><button className="btn btn-primary auth-btn" onClick={() => this.logoutUser()}>Logout</button></Link>
-        <button type="submit" className="btn btn-danger" onClick={() => this.deleteAccount()}>Delete Account</button>
+        <table className="table">
+          <tr>
+            <td>Username</td>
+            <td>{this.props.userInSession.username}</td>
+          </tr>
+          <tr>
+            <td>Created</td>
+            <td>{this.props.userInSession.created}</td>
+          </tr>
+          <tr>
+            <td>
+              <Link to='/'><button className="btn btn-primary auth-btn" onClick={() => this.logoutUser()}>Logout</button></Link>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <Link to="/" onClick={() => this.deleteAccount()} style={{ textDecoration: 'none', color: 'lightgrey' }}>Delete Account</Link>
+            {/* <button type="submit" className="btn btn-danger" onClick={() => this.deleteAccount()}>Delete Account</button> */}
+          </tr>
+        </table>
       </div>
     )
   }
