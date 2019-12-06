@@ -3,9 +3,35 @@ import { Link } from 'react-router-dom';
 
 const UnloggedHome = () => {
   return (
-    <div className="login-signup">
-      <div> <Link to="/login"><button className="btn btn-primary auth-btn">Login</button></Link> </div>
-      <div><Link to="/Signup"><button className="btn btn-primary auth-btn">Sign Up</button></Link></div>
+    <div style={{
+      backgroundImage: `url("/background.jpg")`, 
+      width: '100vw', 
+      height: '100vh', 
+      backgroundRepeat: 'no-repeat',
+      backgroundSize:'cover', 
+      backgroundPosition:'top',
+      display: 'flex',
+      flexDirection: 'column-reverse'
+      // minHeight: '-webkit-fill-available',
+      }} >
+        <div style={{
+          color: 'white',
+          display: 'flex', 
+          flexDirection: 'column',
+          justifyContent: 'center', 
+          alignItems: 'center',
+          width: '100vw', 
+          height: '100vh'}}>
+        <h1 style={{ 
+          fontSize: '100px',
+          fontWeight: 'bold'
+          }}>liquid</h1>
+          <h5>Your personal expense-manager</h5>
+          </div>
+      <div className="login-signup">
+        <div> <Link to="/login"><button className="btn btn-primary auth-btn">Login</button></Link> </div>
+        <div><Link to="/Signup"><button className="btn btn-primary auth-btn">Sign Up</button></Link></div>
+      </div>
     </div>
   )
 }

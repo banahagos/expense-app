@@ -29,17 +29,19 @@ code {
 
 
 .auth-btn{
- background-color: #FF3366;
+ background-color: #ffc38a;
  border: none;
  margin: 5px;
 }
 
 .login-signup{
   display: flex;
+  justify-content: flex-end;
+  margin: 10px;
 }
 
 .auth-btn:hover {
-  background-color: #fa285c;
+  background-color: #ffc38a;
   border: none;
 }
 
@@ -236,16 +238,3 @@ form {
 .auth-link:hover{
   color: grey
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

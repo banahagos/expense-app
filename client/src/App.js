@@ -73,9 +73,9 @@ class App extends React.Component {
           padding: '10px 20px 20px 20px'}}>
           <Route path='/signup' render={() => <Redirect to='/'></Redirect>} />
           <Route path='/login' render={() => <Redirect to='/'></Redirect>} />
-          <Navbar
+          {/* <Navbar
             userInSession={this.state.loggedInUser}
-            getUser={this.getTheUser} />
+            getUser={this.getTheUser} /> */}
           <Switch>
             <Route exact path='/' render={() =>
               <Dashboard
@@ -108,9 +108,9 @@ class App extends React.Component {
     } else {
       return (
         <div className='App'>
-          <Navbar
+          {/* <Navbar
             userInSession={this.state.loggedInUser}
-            getUser={this.getTheUser} />
+            getUser={this.getTheUser} /> */}
           <Switch>
             <Route exact path='/' component={UnloggedHome} />
             <Route exact path='/signup' render={() => <Signup getUser={this.getTheUser} />} />
