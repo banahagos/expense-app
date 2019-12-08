@@ -34,7 +34,7 @@ class Profile extends Component {
   render() {
     return (
       <div className="auth-form">
-        <h2>Profile</h2>
+        {/* <h6>Profile</h6> */}
         <table className="table">
           <tr>
             <td>Username</td>

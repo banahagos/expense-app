@@ -35,11 +35,14 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="auth-form">
+      <div className="auth-form" style={{
+        background: "linear-gradient(to right, #ffc38a 0%, #ffc38a 100%)",
+        width: "100vw",
+        height: "100vh",
+        padding: "30px",
+      }}>
         <h2>Login</h2>
         <form onSubmit={this.handleFormSubmit}>
-
-
           <InputField
             label="Username"
             type="text"

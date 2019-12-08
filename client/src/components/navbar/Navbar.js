@@ -12,9 +12,9 @@ class Navbar extends React.Component {
   render() {
     return (
       <nav className="navbar">
-        {/* {this.props.userInSession ? <NavLink to="/" className="navbar-brand">DASHBOARD</NavLink> : ''} */}
+        {this.props.userInSession ? <NavLink to="/" className="navbar-brand"><h2>liquid</h2></NavLink> : ''}
         <div className="form-inline">
-          {/* {this.props.userInSession ? <Link to ="/profile"><img src="/settings.png" alt="settings" className="settings" /></Link>: ''} */}
+          {this.props.userInSession ? <Link to="/profile"><img src="/settings.png" alt="settings" className="settings" /></Link> : ''}
         </div>
       </nav>
     )

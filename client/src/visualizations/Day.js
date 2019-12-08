@@ -17,7 +17,7 @@ const amountScale = d3.scaleLog();
 const colorScale = chroma.scale(['rgba(83,195,172,0.8)', 'rgba(247, 232, 131, 0.8)', 'rgba(232,81,120,0.8)']); // '#53c3ac', '#f7e883', '#e85178'
 
 class Day extends Component {
-
+ 
   componentDidMount() {
     xScale.range([margin.left, this.props.width - margin.right]);
     this.container = d3.select(this.refs.container);

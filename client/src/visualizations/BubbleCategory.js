@@ -61,7 +61,7 @@ class BubbleCategory extends Component {
     totalPerCategory = values.map(e => {
       return {
         category: e[0],
-        amount: e[1]
+        amount: Math.round(e[1] * 100)/100
       }
     })
 
@@ -110,7 +110,7 @@ class BubbleCategory extends Component {
   render() {
     return (
       <div>
-        <h5 style={{textAlign: 'center', padding: '10px'}}>Categories</h5>
+        <h5 style={{textAlign: 'center', padding: '10px'}}>Total per Category</h5>
         <svg width={width} height={height} ref='container' />
       </div>
     );

@@ -211,13 +211,13 @@ form {
 }
 
 .auth-form-btn{
-  background-color: rgba(83,195,172);
-  border:  rgba(83,195,172);
+  background-color: #ffc38a;
+  border:  #ffc38a;
 }
 
 .auth-form-btn:hover{
-  background-color:rgba(83,195,172);
-  border:  rgba(83,195,172);
+  background-color:#ffc38a;
+  border:  #ffc38a;
 }
 
 .auth-form{

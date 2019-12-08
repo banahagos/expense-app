@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 export default ChartComponent => (
   class ResponsiveChart extends Component {
-    constructor(props){
+    constructor(props) {
       super(props)
 
       this.state = {
@@ -10,9 +10,9 @@ export default ChartComponent => (
       }
     }
 
-    componentDidMount(){
+    componentDidMount() {
       this.fitParentContainer()
-      window.addEventListener('resize', this.fitParentContainer)
+      window.addEventListener("resize", window.addEventListener('resize', this.fitParentContainer))
     }
 
     componentWillUnmount(){
@@ -20,20 +20,20 @@ export default ChartComponent => (
     }
 
     fitParentContainer = () => {
-      const {containerWidth} = this.state
+      const { containerWidth } = this.state
       const currentContainerWidth = this.chartContainer
         .getBoundingClientRect().width
 
       const shouldResize = containerWidth !== currentContainerWidth
 
-      if(shouldResize){
+      if (shouldResize) {
         this.setState({
           containerWidth: currentContainerWidth
         })
       }
     }
 
-    renderChart(){
+    renderChart() {
       const parentWidth = this.state.containerWidth
 
       return (
@@ -41,13 +41,13 @@ export default ChartComponent => (
       )
     }
 
-    render(){
-      const {containerWidth} = this.state
+    render() {
+      const { containerWidth } = this.state
       const shouldRenderChart = containerWidth !== null
 
       return (
         <div
-          ref={(el) => {this.chartContainer = el}}
+          ref={(el) => { this.chartContainer = el }}
           className="Responsive-wrapper"
         >
           {shouldRenderChart && this.renderChart()}

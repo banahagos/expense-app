@@ -8,6 +8,7 @@ const height = 450;
 const width = 450;
 const radius = 10;
 const fontSize = 14;
+let totalPerPayee;
 
 
 // d3 functions
@@ -20,26 +21,15 @@ const simulation = d3.forceSimulation()
   .force("y", d3.forceY(0.001))
   .force("x", d3.forceX(0.001))
   
-              
-// // .force('charge', d3.forceManyBody(-1))
-// .force('collide', d3.forceCollide(radius))
-
-
 
 class BubbleChart extends Component {
 
   componentDidMount() {
     this.container = d3.select(this.refs.container)
-
-    let amountExtent = d3.extent(this.props.expenses, d => d.amount)
-    amountScale.domain(amountExtent)
-
+  
     this.renderCircles();
-    // this.renderLinks()
     simulation.on('tick', this.forceTick)
-    simulation.nodes(this.props.expenses).alpha(0.9).restart()
-
-
+  
     // this.container = d3.select(this.refs.container).append('g');
     this.hover = d3.select(this.refs.container).append('g');
     this.hover.append('rect')
@@ -56,20 +46,42 @@ class BubbleChart extends Component {
   }
 
   componentDidUpdate() {
-    let amountExtent = d3.extent(this.props.expenses, d => d.amount)
-    amountScale.domain(amountExtent)
 
     this.renderCircles();
-    // this.renderLinks()
     simulation.on('tick', this.forceTick)
-    simulation.nodes(this.props.expenses).alpha(0.9).restart()
+    simulation.nodes(totalPerPayee).alpha(0.9).restart()
   }
 
 
   renderCircles = () => {
+      // get total sum per payee & calculate extent
+      const expenses = new Map();
+      for (let expense of this.props.expenses) {
+        const current = expenses.get(expense.payee);
+        if (typeof current !== 'undefined') {
+          expenses.set(expense.payee, current + expense.amount);
+        } else {
+          expenses.set(expense.payee, expense.amount);
+        }
+      }
+      const values = [...expenses.entries()].sort((a, b) => {
+        return b[1] - a[1];
+      });
+  
+      totalPerPayee = values.map(e => {
+        return {
+          payee: e[0],
+          amount: Math.round(e[1] * 100)/100
+        }
+      })
+
+      //  define min + max amount
+    let amountExtent = d3.extent(totalPerPayee, d => d.amount);
+    amountScale = amountScale.domain(amountExtent)
+
     // draw circles  
     this.circles = this.container.selectAll('circle')
-      .data(this.props.expenses, d => d.payee)
+      .data(totalPerPayee, d => d.payee)
                  
 
     // exit
@@ -104,20 +116,6 @@ class BubbleChart extends Component {
   }
 
 
-  // renderLinks = () => {
-  //   // draw the links
-  //   this.links = this.container.selectAll('.link')
-  //     .data(this.props.expenses, d => d.payee)
-
-  //    // exit
-  //    this.links.exit().remove();
-
-  //    this.links = this.links.enter().append('line')
-  //    .merge(this.links)
-  //    .attr("class", "link")
-  // }
-
-
   dragstarted = (d) => {
     if (!d3.event.active) simulation.alphaTarget(0.5).restart();
     d.fx = d.x;
@@ -139,16 +137,13 @@ class BubbleChart extends Component {
     this.circles.attr('cx', d => d.x)
       .attr('cy', d => d.y)
 
-      // this.links.attr('cx', d => d.x)
-      // .attr('cy', d => d.y)
-
   }
 
 
   render() {
     return (
       <div>
-        <h5 style={{textAlign: 'center', padding: '10px'}}>Transactions</h5>
+        <h5 style={{textAlign: 'center', padding: '10px'}}>Total per Payee</h5>
         <svg width={width} height={height} ref='container' />
       </div>
     );

@@ -19,9 +19,9 @@ class Dashboard extends React.Component {
    
     return (
       <div>
-        <div className="settings-box">
+        {/* <div className="settings-box">
           <Link to="/profile"><img src="/settings.png" alt="settings" className="settings" /></Link>
-        </div>
+        </div> */}
         <Link to="/expenses"><div className="fab"> + </div></Link>
         <FilterTab
           currentFilter={this.props.currentFilter}

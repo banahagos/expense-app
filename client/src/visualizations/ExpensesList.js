@@ -9,7 +9,7 @@ import EditExpenseForm from '../components/expenses/EditExpenseForm';
 import axios from 'axios';
 
 
-const height = 800; 
+const height = 800;
 const colors = {
   white: '#fff8fa', //color of the expense circles
   gray: '#e1ecea', //categories and empty day card
@@ -23,12 +23,13 @@ class ExpensesList extends Component {
       isEditFormVisible: false,
       isAddNewFormVisible: true,
       prefillEditForm: {},
-      errMsg: null
+      errMsg: null,
     };
   }
 
   componentDidMount() {
     this.props.getExpenses('')
+
   }
 
   handleEditFormVisibility = () => {
@@ -79,32 +80,19 @@ class ExpensesList extends Component {
     })
   }
 
-  // handleFormVisibility = () => {
-  //   this.setState({
-  //     isAddNewFormVisible: !this.state.isAddNewFormVisible,
-  //   })
-  // }
-
   prevWeek = () => {
-    // todo: error handling
     var selectedWeek = d3.timeWeek.offset(this.props.selectedWeek, -1);
     this.props.getSelectedWeek(selectedWeek)
   }
 
   nextWeek = () => {
-    // todo: error handling
     var selectedWeek = d3.timeWeek.offset(this.props.selectedWeek, 1);
     this.props.getSelectedWeek(selectedWeek)
   }
 
-
-  // editDate = (expense, day) => {
-  //   expense.date = day.date;
-  //   this.forceUpdate();
-  // }
-
-
   render() {
+    console.log("containerWidth", this.props.parentWidth)
+
     let selectedWeek = d3.timeFormat('%B %d, %Y')(this.props.selectedWeek);
     const style = {
       width: this.props.parentWidth,
@@ -153,9 +141,9 @@ class ExpensesList extends Component {
             deleteExpense={this.deleteExpense}
             errMsg={this.state.errMsg}
           />}
-        {/* <input id='addCategory' style={inputStyle} type='text' placeholder='Add Category'
-          onFocus={this.startCategory} onBlur={this.clearCategory} onKeyDown={this.addCategory}></input> */}
-        <svg style={svgStyle} >
+
+
+        <svg style={svgStyle}>
           <Day {...props} {...this.state} />
           {/* <Categories {...props} {...this.state} /> */}
           <Expenses {...props} {...this.state} />
@@ -166,3 +154,4 @@ class ExpensesList extends Component {
 }
 
 export default ResponsiveWrapper(ExpensesList);
+// export default ExpensesList
