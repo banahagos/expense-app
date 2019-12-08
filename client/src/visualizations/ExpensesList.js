@@ -91,8 +91,6 @@ class ExpensesList extends Component {
   }
 
   render() {
-    console.log("containerWidth", this.props.parentWidth)
-
     let selectedWeek = d3.timeFormat('%B %d, %Y')(this.props.selectedWeek);
     const style = {
       width: this.props.parentWidth,

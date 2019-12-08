@@ -32,15 +32,11 @@ class BubbleChart extends Component {
   
     // this.container = d3.select(this.refs.container).append('g');
     this.hover = d3.select(this.refs.container).append('g');
-    this.hover.append('rect')
-      .attr('height', fontSize + 4)
-      .attr('y', -fontSize / 2 - 2)
-      .attr('opacity', 0.85)
-      .attr('fill', 'white');
     this.hover.append('text')
-      .attr('text-anchor', 'right')
+      // .attr('text-anchor', 'right')
       .attr('dy', '.90em') // .35
-      .attr('fill', 'black')
+      .attr('dx', '12em')
+      .attr('fill', 'grey')
       .style('font-size', fontSize)
       .style('pointer-events', 'none');
   }

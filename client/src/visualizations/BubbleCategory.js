@@ -15,6 +15,7 @@ const simulation = d3.forceSimulation()
   .force('charge', d3.forceManyBody(20))
   .force('collide', d3.forceCollide(d => radiusScale.domain(amountExtent)(d.amount)))
 
+
 class BubbleCategory extends Component {
 
   componentDidMount() {
@@ -24,17 +25,14 @@ class BubbleCategory extends Component {
     simulation.nodes(totalPerCategory).alpha(0.9).restart()
 
     this.hover = d3.select(this.refs.container).append('g');
-    this.hover.append('rect')
-      .attr('height', fontSize + 4)
-      .attr('y', -fontSize / 2 - 2)
-      .attr('opacity', 0.85)
-      .attr('fill', 'white');
     this.hover.append('text')
-      .attr('text-anchor', 'right')
+      // .attr('text-anchor', 'right')
       .attr('dy', '.90em') // .35
-      .attr('fill', 'black')
+      .attr('dx', '12em')
+      .attr('fill', 'grey')
       .style('font-size', fontSize)
       .style('pointer-events', 'none');
+
   }
 
   componentDidUpdate() {
@@ -83,7 +81,6 @@ class BubbleCategory extends Component {
       .attr('fill', 'red')
       .attr('opacity', 0.05)
       .attr('class', 'category')
-      .on('click', d => console.log(d))
       .on('mouseover', this.mouseOver)
       .on('mouseleave', () => this.hover.style('display', 'none'))
       .style('cursor', 'move')
@@ -99,7 +96,7 @@ class BubbleCategory extends Component {
     const width = this.hover.select('text').node().getBoundingClientRect().width;
     this.hover.select('rect')
       .attr('width', width + 6)
-      .attr('x', -width / 2 - 3);
+      .attr('x', width / 2 );
   }
 
   forceTick = () => {
