@@ -25,12 +25,13 @@ code {
   padding: 10px;
   padding-top: 0px;
   margin: 0px;
+  flex-wrap: wrap;
 }
 
 
 .auth-btn{
  background-color: #ffc38a;
- border: none;
+ border: #ffc38a;
  margin: 5px;
 }
 
@@ -42,7 +43,7 @@ code {
 
 .auth-btn:hover {
   background-color: #ffc38a;
-  border: none;
+  border: #ffc38a
 }
 
 .charts-container {
@@ -189,7 +190,7 @@ form {
 .fab {
   width: 50px;
   height: 50px;
-  background-color: rgba(232,81,120);
+  background-color: #ffc38a;
   border-radius: 50%;
   box-shadow: 0 6px 10px 0 #666;
 
@@ -224,7 +225,12 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw
+  width: 100vw;
+  width: 100vw;
+  height: 100vh;
+  padding: 30px;
+  background-image: url("/background.jpg");
+  color: #fff
 }
 
 .form-control{
@@ -232,9 +238,53 @@ form {
 }
 
 .auth-link{
-  color: grey
+  color: #ff8b14
 }
 
 .auth-link:hover{
-  color: grey
+  color: #ff8b14
+}
+
+.unlogged-home{
+  background-image: url("/background.jpg");
+  width: 100vw;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
+  display: flex;
+  flex-direction: column-reverse;
+  color: #fff
+}
+
+.unlogged-home-content{
+  color: 'white';
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  color: #fff 
+}
+
+.unlogged-home-content h1{
+  color: #fff;
+  font-size: 100px;
+  font-weight: bold,
+}
+
+.auth-msg{
+  color:#ff8b14;
+}
+
+.err-msg{
+  background: #F02B63;
+  box-sizing: border-box;
+  color: #fff;
+  margin: 40px auto; 
+  padding: 10px;
+  width: 100%; 
+  text-align: center;
+  font-size: 16px;
 }

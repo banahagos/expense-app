@@ -35,12 +35,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="auth-form" style={{
-        background: "linear-gradient(to right, #ffc38a 0%, #ffc38a 100%)",
-        width: "100vw",
-        height: "100vh",
-        padding: "30px",
-      }}>
+      <div className="auth-form">
         <h2>Login</h2>
         <form onSubmit={this.handleFormSubmit}>
           <InputField
@@ -62,9 +57,9 @@ class Login extends Component {
           <button type="submit" className="btn btn-primary auth-form-btn">Login</button>
 
         </form>
-        {this.state.errMsg ? this.state.errMsg : ''}
-        <p>Don't have account?
-            <Link to="/signup" className="auth-link"> Sign up</Link>
+        {this.state.errMsg ? <div className="err-msg">{this.state.errMsg}</div> : ''}
+        <p className="auth-msg">Don't have account?
+            <Link to="/signup" className="auth-link auth-msg"> Sign up</Link>
         </p>
       </div>
     )

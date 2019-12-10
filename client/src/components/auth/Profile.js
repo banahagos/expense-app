@@ -33,27 +33,29 @@ class Profile extends Component {
 
   render() {
     return (
-      <div className="auth-form">
+      <div>
         {/* <h6>Profile</h6> */}
         <table className="table">
-          <tr>
-            <td>Username</td>
-            <td>{this.props.userInSession.username}</td>
-          </tr>
-          <tr>
-            <td>Created</td>
-            <td>{this.props.userInSession.created}</td>
-          </tr>
-          <tr>
-            <td>
-              <Link to='/'><button className="btn btn-primary auth-btn" onClick={() => this.logoutUser()}>Logout</button></Link>
-            </td>
-            <td></td>
-          </tr>
-          <tr>
-            <Link to="/" onClick={() => this.deleteAccount()} style={{ textDecoration: 'none', color: 'lightgrey' }}>Delete Account</Link>
-            {/* <button type="submit" className="btn btn-danger" onClick={() => this.deleteAccount()}>Delete Account</button> */}
-          </tr>
+          <tbody>
+            <tr>
+              <td>Username</td>
+              <td>{this.props.userInSession.username}</td>
+            </tr>
+            <tr>
+              <td>Created</td>
+              <td>{moment(this.props.userInSession.created).format('DD-MM-YYYY')}</td>
+            </tr>
+            <tr>
+              <td>
+                <Link to='/'><button className="btn btn-primary auth-btn" onClick={() => this.logoutUser()}>Logout</button></Link>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <Link to="/" onClick={() => this.deleteAccount()} style={{ textDecoration: 'none', color: 'lightgrey' }}>Delete Account</Link>
+              {/* <button type="submit" className="btn btn-danger" onClick={() => this.deleteAccount()}>Delete Account</button> */}
+            </tr>
+          </tbody>
         </table>
       </div>
     )

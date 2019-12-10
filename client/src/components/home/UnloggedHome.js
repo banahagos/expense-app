@@ -3,29 +3,11 @@ import { Link } from 'react-router-dom';
 
 const UnloggedHome = () => {
   return (
-    <div style={{
-      backgroundImage: `url("/background.jpg")`,
-      width: '100vw',
-      height: '100vh',
-      backgroundRepeat: 'no-repeat',
-      backgroundSize: 'cover',
-      backgroundPosition: 'top',
-      display: 'flex',
-      flexDirection: 'column-reverse'
-    }} >
-      <div style={{
-        color: 'white',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100vw',
-        height: '100vh',
-
-      }}>
+    <div className='unlogged-home' >
+      <div className='unlogged-home-content'>
         <h1 style={{
-          fontSize: '100px',
-          fontWeight: 'bold'
+          // fontSize: '100px',
+          // fontWeight: 'bold'
         }}>liquid</h1>
         {/* <h4>Your personal expense-manager</h4> */}
       </div>

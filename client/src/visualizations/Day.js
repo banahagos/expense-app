@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
 import _ from 'lodash';
-
 import chroma from 'chroma-js';
 
 const height = 650;
-const dayWidth = 55;
+const dayWidth = 55; //
 const dayHeight = 75;
 const topPadding = 150;
 const margin = { left: 40, top: 20, right: 40, bottom: 20 };
@@ -17,7 +16,7 @@ const amountScale = d3.scaleLog();
 const colorScale = chroma.scale(['rgba(83,195,172,0.8)', 'rgba(247, 232, 131, 0.8)', 'rgba(232,81,120,0.8)']); // '#53c3ac', '#f7e883', '#e85178'
 
 class Day extends Component {
- 
+  
   componentDidMount() {
     xScale.range([margin.left, this.props.width - margin.right]);
     this.container = d3.select(this.refs.container);
@@ -149,3 +148,4 @@ class Day extends Component {
 }
 
 export default Day;
+

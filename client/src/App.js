@@ -107,7 +107,7 @@ class App extends React.Component {
       );
     } else {
       return (
-        <div className='App' style={{color: 'white'}}>
+        <div className='App'>
           {/* <Navbar
             userInSession={this.state.loggedInUser}
             getUser={this.getTheUser} /> */}

@@ -29,7 +29,6 @@ class ExpensesList extends Component {
 
   componentDidMount() {
     this.props.getExpenses('')
-
   }
 
   handleEditFormVisibility = () => {
@@ -101,7 +100,7 @@ class ExpensesList extends Component {
       position: 'absolute',
       top: 0,
       width: this.props.parentWidth,
-      height,
+      height: height,
       zIndex: -1,
 
     }
@@ -120,7 +119,7 @@ class ExpensesList extends Component {
     };
 
     return (
-      <div className='App' style={style} >
+      <div className='ExpensesList' style={style} >
         <h3 style={{ textAlign: 'center', color: colors.black }}>
           <span style={{ cursor: 'pointer' }} onClick={this.prevWeek}>← </span>
           Week of {selectedWeek}

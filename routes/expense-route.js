@@ -6,7 +6,7 @@ const { startOfDay, subWeeks, subMonths } = require('date-fns');
 
 
 
-// GET route => get expenses (filter by dates  or all)
+// GET route => get expenses (all, last week or last month)
 router.get('/expenses/', async (req, res, next) => {
   const lastWeek = startOfDay(subWeeks(Date.now(), 1));
   const lastMonth = startOfDay(subMonths(Date.now(), 1));
@@ -39,8 +39,6 @@ router.get('/expenses/', async (req, res, next) => {
 router.get('/today', async (req, res, next) => {
   const today = startOfDay(Date.now())
 
-  console.log(startOfDay(Date.now()))
-
   try {
     const todayExpenses = await Expense.find({ owner: req.user, dateOfExpense: { $gte: today, $lt: Date.now()}})
     res.json(todayExpenses)
@@ -52,7 +50,6 @@ router.get('/today', async (req, res, next) => {
 // Post route ==> create new expense
 router.post('/new-expense', (req, res, next) => {
   const { amount, category, dateOfExpense, monthlyRecurring } = req.body
-
   const payee = req.body.payee.toLowerCase()
 
   if (!payee || !amount || !category || !dateOfExpense) {
@@ -98,7 +95,7 @@ router.put('/expenses/:id', (req, res, next) => {
   })
 });
 
-// PUT route => to update a specific expense
+// Delete route => to delete a specific expense
 router.delete('/expenses/:id', (req, res, next) => {
   const { payee, category, amount, dateOfExpense, monthlyRecurring } = req.body
 

@@ -12,7 +12,7 @@ export default ChartComponent => (
 
     componentDidMount() {
       this.fitParentContainer()
-      window.addEventListener("resize", window.addEventListener('resize', this.fitParentContainer))
+      window.addEventListener('resize', this.fitParentContainer)
     }
 
     componentWillUnmount(){

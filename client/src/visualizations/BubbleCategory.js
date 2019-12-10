@@ -17,7 +17,6 @@ const simulation = d3.forceSimulation()
 
 
 class BubbleCategory extends Component {
-
   componentDidMount() {
     this.container = d3.select(this.refs.container)
     this.renderCircles();
@@ -78,8 +77,8 @@ class BubbleCategory extends Component {
     this.circles = this.circles.enter().append('circle')
       .merge(this.circles)
       .attr('r', d => radiusScale.domain(amountExtent)(d.amount))
-      .attr('fill', 'red')
-      .attr('opacity', 0.05)
+      .attr('fill', '#ffc38a')
+      .attr('opacity', 0.3)
       .attr('class', 'category')
       .on('mouseover', this.mouseOver)
       .on('mouseleave', () => this.hover.style('display', 'none'))
