@@ -1,6 +1,6 @@
 import React from 'react';
 import FilterTab from '../expenses/FilterTab';
-import BubbleChart from '../../visualizations/BubbleChart';
+import BubbleChartPayee from '../../visualizations/BubbleChartPayee';
 import BubbleCategory from '../../visualizations/BubbleCategory';
 import { Link } from 'react-router-dom';
 import OverviewExpenses from '../expenses/OverviewExpenses';
@@ -36,7 +36,7 @@ class Dashboard extends React.Component {
         />
 
         <div className="dash-viz">
-          <BubbleChart
+          <BubbleChartPayee
             expenses={this.props.expenses}
           />
           <BubbleCategory

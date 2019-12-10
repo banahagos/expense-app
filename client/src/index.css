@@ -33,6 +33,7 @@ code {
  background-color: #ffc38a;
  border: #ffc38a;
  margin: 5px;
+ border: #ffc38a
 }
 
 .login-signup{
@@ -44,6 +45,7 @@ code {
 .auth-btn:hover {
   background-color: #ffc38a;
   border: #ffc38a
+
 }
 
 .charts-container {
@@ -216,6 +218,7 @@ form {
   border:  #ffc38a;
 }
 
+
 .auth-form-btn:hover{
   background-color:#ffc38a;
   border:  #ffc38a;
@@ -287,4 +290,24 @@ form {
   width: 100%; 
   text-align: center;
   font-size: 16px;
+}
+
+.svg {
+  overflow: visible;
+  position: absolute;
+  top: 0;
+  z-index: -1;
+}
+
+.ExpensesList{
+  margin: auto;
+}
+
+.ExpensesList h3 {
+  color: #516561;
+  text-align: center
+}
+
+.ExpensesList-arrows{
+  cursor: pointer
 }

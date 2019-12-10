@@ -11,8 +11,8 @@ import axios from 'axios';
 
 const height = 800;
 const colors = {
-  white: '#fff8fa', //color of the expense circles
-  gray: '#e1ecea', //categories and empty day card
+  white: '#fff8fa', // color of the expense circles
+  gray: '#e1ecea', // categories and empty day card
   black: '#516561', // headline, category text input field
 };
 
@@ -91,39 +91,13 @@ class ExpensesList extends Component {
 
   render() {
     let selectedWeek = d3.timeFormat('%B %d, %Y')(this.props.selectedWeek);
-    const style = {
-      width: this.props.parentWidth,
-      margin: 'auto',
-    }
-    const svgStyle = {
-      overflow: 'visible',
-      position: 'absolute',
-      top: 0,
-      width: this.props.parentWidth,
-      height: height,
-      zIndex: -1,
-
-    }
-
-    const props = {
-      width: this.props.parentWidth,
-      colors,
-      // linkToCategory: this.linkToCategory,
-      editDate: this.editDate,
-      // deleteCategory: this.deleteCategory,
-      selectedWeek: this.props.selectedWeek,
-      expenses: this.props.expenses,
-      handleEditFormVisibility: this.handleEditFormVisibility,
-      handleAddFormVisibility: this.handleAddFormVisibility,
-      getEditObject: this.getEditObject,
-    };
 
     return (
-      <div className='ExpensesList' style={style} >
-        <h3 style={{ textAlign: 'center', color: colors.black }}>
-          <span style={{ cursor: 'pointer' }} onClick={this.prevWeek}>← </span>
+      <div className='ExpensesList' width={this.props.parentWidth} >
+        <h3>
+          <span className='ExpensesList-arrows' onClick={this.prevWeek}>← </span>
           Week of {selectedWeek}
-          <span style={{ cursor: 'pointer' }} onClick={this.nextWeek}> →</span>
+          <span className='ExpensesList-arrows' onClick={this.nextWeek}> →</span>
         </h3>
         {this.state.isAddNewFormVisible &&
           <AddExpenseForm
@@ -140,10 +114,27 @@ class ExpensesList extends Component {
           />}
 
 
-        <svg style={svgStyle}>
-          <Day {...props} {...this.state} />
-          {/* <Categories {...props} {...this.state} /> */}
-          <Expenses {...props} {...this.state} />
+        <svg className='svg' width={this.props.parentWidth} height={height}>
+          <Day
+            width={this.props.parentWidth}
+            colors={colors}
+            editDate={this.editDate}
+            selectedWeek={this.props.selectedWeek}
+            expenses={this.props.expenses}
+            handleEditFormVisibility={this.handleEditFormVisibility}
+            handleAddFormVisibility={this.handleAddFormVisibility}
+            getEditObject={this.getEditObject}
+          />
+          <Expenses
+            width={this.props.parentWidth}
+            colors={colors}
+            editDate={this.editDate}
+            selectedWeek={this.props.selectedWeek}
+            expenses={this.props.expenses}
+            handleEditFormVisibility={this.handleEditFormVisibility}
+            handleAddFormVisibility={this.handleAddFormVisibility}
+            getEditObject={this.getEditObject}
+          />
         </svg>
       </div>
     );
@@ -151,4 +142,3 @@ class ExpensesList extends Component {
 }
 
 export default ResponsiveWrapper(ExpensesList);
-// export default ExpensesList

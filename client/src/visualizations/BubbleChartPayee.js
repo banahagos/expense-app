@@ -22,7 +22,7 @@ const simulation = d3.forceSimulation()
   .force("x", d3.forceX(0.001))
   
 
-class BubbleChart extends Component {
+class BubbleChartPayee extends Component {
 
   componentDidMount() {
     this.container = d3.select(this.refs.container)
@@ -132,7 +132,6 @@ class BubbleChart extends Component {
   forceTick = () => {
     this.circles.attr('cx', d => d.x)
       .attr('cy', d => d.y)
-
   }
 
 
@@ -146,4 +145,4 @@ class BubbleChart extends Component {
   }
 }
 
-export default BubbleChart;
+export default BubbleChartPayee;
