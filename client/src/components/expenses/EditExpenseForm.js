@@ -13,6 +13,17 @@ class EditExpenseForm extends Component {
     };
   }
 
+  UNSAFE_componentWillReceiveProps(newProps) {
+    if (this.props.prefill !== newProps.prefill) {
+      this.setState({
+        payee: newProps.prefill.payee,
+        amount: newProps.prefill.amount,
+        category: newProps.prefill.category,
+        dateOfExpense: moment(newProps.prefill.dateOfExpense).toISOString().split('T')[0],
+      });
+    }
+  }
+
   handleFormSubmit = e => {
     e.preventDefault();
     const { payee, category, dateOfExpense } = this.state
@@ -32,7 +43,6 @@ class EditExpenseForm extends Component {
 
 
   render() {
-
     return (
       <div className="expense-form">
         <form onSubmit={this.handleFormSubmit} name="isAddFormVisible">

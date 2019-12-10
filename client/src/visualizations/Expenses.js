@@ -3,7 +3,6 @@ import * as d3 from 'd3';
 import _ from 'lodash';
 
 const height = 650;
-// const dayWidth = 55;
 const dayHeight = 75;
 const margin = { left: 40, top: 20, right: 40, bottom: 20 };
 const topPadding = 150;
@@ -20,17 +19,14 @@ const simulation = d3.forceSimulation()
   .force('collide', d3.forceCollide(d => d.radius + 2))
   .force('x', d3.forceX(d => d.focusX))
   .force('y', d3.forceY(d => d.focusY))
-  .stop();
-const drag = d3.drag();
+  // .stop();
+
 
 class Expenses extends Component {
 
   componentDidMount() {
     xScale.range([margin.left, this.props.width - margin.right]);
     simulation.on('tick', this.forceTick);
-    drag.on('start', this.dragStart)
-      .on('drag', this.dragExpense)
-      .on('end', this.dragEnd);
 
     this.container = d3.select(this.refs.container).append('g');
     this.hover = d3.select(this.refs.container).append('g');
@@ -85,34 +81,17 @@ class Expenses extends Component {
         });
       }).flatten().value()
 
-
-    // .map((expenses, week) => {
-    //   week = new Date(week);
-    //   return _.map(expenses, exp => {
-    //     const { x, y } = this.calculateDayPosition(new Date(exp.dateOfExpense), true);
-    //     return Object.assign(exp, {
-    //       radius: amountScale(exp.amount),
-    //       focusX: x,
-    //       focusY: y,
-    //       x: exp.x || x,
-    //       y: exp.y || y,
-    //       dateOfExpense: new Date(exp.dateOfExpense)
-    //     });
-    //   });
-    // }).flatten().value()
-
     // get min+max dates
-
-    const [minDate, maxDate] = d3.extent(this.props.expenses,
-      d => d3.timeDay.floor(new Date(d.dateOfExpense)));
+    // const [minDate, maxDate] = d3.extent(this.props.expenses,
+    //   d => d3.timeDay.floor(new Date(d.dateOfExpense)));
     // calculate all potential dates to drag expenses into
-    const selectedWeek = d3.timeDay.range(this.props.selectedWeek,
-      d3.timeWeek.offset(this.props.selectedWeek, 1));
-    this.days = _.chain(selectedWeek)
-      .map(date => Object.assign(this.calculateDayPosition(date, true), { date }))
-      .union(_.map(d3.timeDay.range(minDate, maxDate),
-        (date) => Object.assign(this.calculateDayPosition(date), { date })))
-      .value();
+    // const selectedWeek = d3.timeDay.range(this.props.selectedWeek,
+    //   d3.timeWeek.offset(this.props.selectedWeek, 1));
+    // this.days = _.chain(selectedWeek)
+    //   .map(date => Object.assign(this.calculateDayPosition(date, true), { date }))
+    //   .union(_.map(d3.timeDay.range(minDate, maxDate),
+    //     (date) => Object.assign(this.calculateDayPosition(date), { date })))
+    //   .value();
   }
 
   calculateDayPosition = (date, shouldSelectedWeekCurve) => {
@@ -146,7 +125,6 @@ class Expenses extends Component {
       .attr('id', this.props.expenses._id) 
       .attr('fill', this.props.colors.white)
       .style('cursor', 'move')
-      .call(drag)
       .on('mouseover', this.mouseOver)
       .on('mouseleave', () => this.hover.style('display', 'none'))
       .on('click', this.clickExpense )
@@ -160,61 +138,9 @@ class Expenses extends Component {
       .attr('cy', d => d.y);
   }
 
-  // dragStart = () => {
-  //   this.dragging = true;
-  //   this.hover.style('display', 'none')
-
-  //   simulation.alphaTarget(0.3).restart();
-  //   d3.event.subject.fx = d3.event.subject.x;
-  //   d3.event.subject.fy = d3.event.subject.y;
-  // }
-
-  // dragExpense = () => {
-  //   this.dragged = null;
-
-  //   d3.event.subject.fx = d3.event.x;
-  //   d3.event.subject.fy = d3.event.y;
-
-  //   const expense = d3.event.subject;
-  //   const expenseX = d3.event.x;
-  //   const expenseY = d3.event.y;
-  //   // go through all categories to see if overlapping
-  //   _.each(this.props.categories, category => {
-  //     const { x, y, radius } = category;
-  //     if (x - radius < expenseX && expenseX < x + radius &&
-  //       y - radius < expenseY && expenseY < y + radius) {
-  //       this.dragged = { expense, category, type: 'category' };
-  //     }
-  //   });
-  //   // go through all the days to see if expense overlaps
-  //   _.each(this.days, day => {
-  //     const { x, y } = day;
-  //     if (x - dayWidth < expenseX && expenseX < x + dayWidth &&
-  //       y - dayHeight < expenseY && expenseY < y + dayHeight) {
-  //       this.dragged = { expense, day, type: 'day' };
-  //     }
-  //   });
-  // }
-
-  // dragEnd = () => {
-  //   if (!d3.event.active) simulation.alphaTarget(0);
-  //   d3.event.subject.fx = null;
-  //   d3.event.subject.fy = null;
-
-  //   if (this.dragged) {
-  //     const { expense, category, day } = this.dragged;
-  //     if (this.dragged.type === 'category') {
-  //       this.props.linkToCategory(expense, category);
-  //     } else if (this.dragged.type === 'day') {
-  //       this.props.editDate(expense, day);
-  //     }
-  //   }
-  //   this.dragged = null;
-  //   this.dragging = false;
-  // }
 
   mouseOver = (d) => {
-    if (this.dragging) return;
+    // if (this.dragging) return;
     this.hover.style('display', 'block');
 
     const { x, y, payee, amount } = d;
