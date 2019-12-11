@@ -19,7 +19,7 @@ class App extends React.Component {
       loggedInUser: this.props.user,
       expenses: [],
       listOfTodayExpenses: [],
-      currentFilter: '',
+      currentFilter: '?filter=lastweek',
       isTodayExpensesLoading: true,
       isListOfExpensesLoading: true,
       selectedWeek: d3.timeWeek.floor(new Date()),

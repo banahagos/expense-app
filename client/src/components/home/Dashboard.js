@@ -8,7 +8,7 @@ import OverviewExpenses from '../expenses/OverviewExpenses';
 class Dashboard extends React.Component {
 
   componentDidMount() {
-    this.props.getExpenses(this.props.currentFilter)
+    this.props.getExpenses('?filter=lastweek')
     this.props.getTodayExpenses()
   }
 
@@ -16,12 +16,9 @@ class Dashboard extends React.Component {
     if (this.props.isTodayExpensesLoading || this.props.isListOfExpensesLoading) {
       return <div>...loading</div>
     }
-   
+
     return (
       <div>
-        {/* <div className="settings-box">
-          <Link to="/profile"><img src="/settings.png" alt="settings" className="settings" /></Link>
-        </div> */}
         <Link to="/expenses"><div className="fab"> + </div></Link>
         <FilterTab
           currentFilter={this.props.currentFilter}
