@@ -11,9 +11,13 @@ let totalPerCategory;
 let amountExtent;
 const radiusScale = d3.scaleSqrt().range([10, 40])
 const simulation = d3.forceSimulation()
-  .force('center', d3.forceCenter(width / 2, height / 2))
-  .force('charge', d3.forceManyBody(20))
+  // .force('center', d3.forceCenter(width / 2, height / 2))
+  // .force('charge', d3.forceManyBody(20))
   .force('collide', d3.forceCollide(d => radiusScale.domain(amountExtent)(d.amount)))
+  .force("charge", d3.forceManyBody().strength(-100).distanceMin(100).distanceMax(200))
+  .force("center", d3.forceCenter(width / 2, height / 2))
+  .force("y", d3.forceY(0.001))
+  .force("x", d3.forceX(0.001))
 
 
 class BubbleCategory extends Component {
@@ -83,6 +87,10 @@ class BubbleCategory extends Component {
       .on('mouseover', this.mouseOver)
       .on('mouseleave', () => this.hover.style('display', 'none'))
       .style('cursor', 'move')
+      .call(d3.drag()
+      .on("start", this.dragstarted)
+      .on("drag", this.dragged)
+      .on("end", this.dragended));
   }
 
   mouseOver = (d) => {
@@ -96,6 +104,23 @@ class BubbleCategory extends Component {
     this.hover.select('rect')
       .attr('width', width + 6)
       .attr('x', width / 2);
+  }
+
+  dragstarted = (d) => {
+    if (!d3.event.active) simulation.alphaTarget(0.5).restart();
+    d.fx = d.x;
+    d.fy = d.y;
+  }
+
+  dragged = (d) => {
+    d.fx = d3.event.x;
+    d.fy = d3.event.y;
+  }
+
+  dragended = (d) => {
+    if (!d3.event.active) simulation.alphaTarget(0.5);
+    d.fx = null;
+    d.fy = null;
   }
 
   forceTick = () => {
