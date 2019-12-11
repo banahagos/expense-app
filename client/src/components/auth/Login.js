@@ -55,9 +55,9 @@ class Login extends Component {
           />
 
           <button type="submit" className="btn btn-primary auth-form-btn">Login</button>
-
+          {this.state.errMsg ? <div className="err-msg">{this.state.errMsg}</div> : ''}
         </form>
-        {this.state.errMsg ? <div className="err-msg">{this.state.errMsg}</div> : ''}
+        
         <p className="auth-msg">Don't have account?
             <Link to="/signup" className="auth-link auth-msg"> Sign up</Link>
         </p>
