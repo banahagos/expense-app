@@ -69,8 +69,10 @@ class App extends React.Component {
   render() {
     if (this.state.loggedInUser) {
       return (
-        <div className='App' style={{margin: '10px 20px 20px 20px',
-          padding: '10px 20px 20px 20px'}}>
+        <div className='App' style={{
+          margin: '10px 20px 20px 20px',
+          padding: '10px 20px 20px 20px'
+        }}>
           <Route path='/signup' render={() => <Redirect to='/'></Redirect>} />
           <Route path='/login' render={() => <Redirect to='/'></Redirect>} />
           <Navbar
@@ -108,9 +110,6 @@ class App extends React.Component {
     } else {
       return (
         <div className='App'>
-          {/* <Navbar
-            userInSession={this.state.loggedInUser}
-            getUser={this.getTheUser} /> */}
           <Switch>
             <Route exact path='/' component={UnloggedHome} />
             <Route exact path='/signup' render={() => <Signup getUser={this.getTheUser} />} />

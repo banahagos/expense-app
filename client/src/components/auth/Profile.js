@@ -33,7 +33,7 @@ class Profile extends Component {
 
   render() {
     return (
-      <div>
+      <div className="profile-page">
         {/* <h6>Profile</h6> */}
         <table className="table">
           <tbody>
@@ -44,19 +44,23 @@ class Profile extends Component {
             <tr>
               <td>Created</td>
               <td>{moment(this.props.userInSession.created).format('DD-MM-YYYY')}</td>
+
             </tr>
-            <tr>
+            {/* <tr>
               <td>
                 <Link to='/'><button className="btn btn-primary auth-btn" onClick={() => this.logoutUser()}>Logout</button></Link>
               </td>
               <td></td>
-            </tr>
+            </tr> */}
             <tr>
+              <td>
               <Link to="/" onClick={() => this.deleteAccount()} style={{ textDecoration: 'none', color: 'lightgrey' }}>Delete Account</Link>
-              {/* <button type="submit" className="btn btn-danger" onClick={() => this.deleteAccount()}>Delete Account</button> */}
+              </td>
+              <td></td>
             </tr>
           </tbody>
         </table>
+        <div><Link to='/'><button className="btn btn-primary auth-btn" onClick={() => this.logoutUser()}>Logout</button></Link></div>
       </div>
     )
   }

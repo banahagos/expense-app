@@ -311,3 +311,21 @@ form {
 .ExpensesList-arrows{
   cursor: pointer
 }
+
+.profile-page {
+  padding-top: 50px;
+}
+
+.profile-page td {
+  color: #516561;
+}
+
+.edit-btn{
+  background-color:  #ffc38a;
+  border:  #ffc38a
+}
+
+.edit-btn:hover{
+  background-color:  #ffc38a;
+  border:  #ffc38a
+}
