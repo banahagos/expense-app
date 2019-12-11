@@ -9,7 +9,7 @@ const OverviewExpenses = props => {
         <div className="overview-expenses">
           <div className="overview-expenses-left">
             <div>
-              <h4 className="title">{Math.round(props.listOfTodayExpenses.map(e => e.amount).reduce((acc, val) => { return acc + val }, 0) * 100) / 100}<sup>€</sup></h4>
+              <h4 className="title">{(Math.round(props.listOfTodayExpenses.map(e => e.amount).reduce((acc, val) => { return acc + val }, 0) * 100) / 100).toFixed(2)}<sup>€</sup></h4>
               <div>
                 <p className="subtitle">Today</p>
                 {/* <p>- x €</p> */}
@@ -19,7 +19,7 @@ const OverviewExpenses = props => {
           </div>
           <div className="overview-expenses-right">
             <div>
-              <h4 className="title">{Math.round(props.expenses.map(e => e.amount).reduce((acc, val) => { return acc + val }, 0) * 100) / 100}<sup>€</sup></h4>
+              <h4 className="title">{(Math.round(props.expenses.map(e => e.amount).reduce((acc, val) => { return acc + val }, 0) * 100) / 100).toFixed(2)}<sup>€</sup></h4>
               <div>
                 {props.currentFilter === '?filter=lastweek' ? <p className="subtitle">Week</p> : ''}
                 {props.currentFilter === '?filter=lastmonth' ? <p className="subtitle">Month</p> : ''}

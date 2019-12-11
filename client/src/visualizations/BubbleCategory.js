@@ -9,7 +9,7 @@ const fontSize = 14;
 // d3 functions
 let totalPerCategory;
 let amountExtent;
-const radiusScale = d3.scaleSqrt().range([10, 50])
+const radiusScale = d3.scaleSqrt().range([10, 40])
 const simulation = d3.forceSimulation()
   .force('center', d3.forceCenter(width / 2, height / 2))
   .force('charge', d3.forceManyBody(20))
@@ -58,7 +58,7 @@ class BubbleCategory extends Component {
     totalPerCategory = values.map(e => {
       return {
         category: e[0],
-        amount: Math.round(e[1] * 100)/100
+        amount: Math.round(e[1] * 100) / 100
       }
     })
 
@@ -88,14 +88,14 @@ class BubbleCategory extends Component {
   mouseOver = (d) => {
     this.hover.style('display', 'block');
 
-    const {category, amount } = d;
+    const { category, amount } = d;
     // this.hover.attr('transform', 'translate(' + [x, y + d.radius + fontSize] + ')');
     this.hover.select('text')
-      .text(_.map(category.split(' '), _.capitalize).join(' ') + " " + amount + "€")
+      .text(_.map(category.split(' '), _.capitalize).join(' ') + " " + amount.toFixed(2) + "€")
     const width = this.hover.select('text').node().getBoundingClientRect().width;
     this.hover.select('rect')
       .attr('width', width + 6)
-      .attr('x', width / 2 );
+      .attr('x', width / 2);
   }
 
   forceTick = () => {
@@ -106,7 +106,7 @@ class BubbleCategory extends Component {
   render() {
     return (
       <div>
-        <h5 style={{textAlign: 'center', padding: '10px'}}>Total per Category</h5>
+        <h5 style={{ textAlign: 'center', padding: '10px' }}>Total per Category</h5>
         <svg width={width} height={height} ref='container' />
       </div>
     );

@@ -104,7 +104,7 @@ class BubbleChartPayee extends Component {
     const { payee, amount } = d;
     // this.hover.attr('transform', 'translate(' + [x, y + d.radius + fontSize] + ')');
     this.hover.select('text')
-      .text(_.map(payee.split(' '), _.capitalize).join(' ') + " " + amount + "€")
+      .text(_.map(payee.split(' '), _.capitalize).join(' ') + " " + amount.toFixed(2) + "€")
     const width = this.hover.select('text').node().getBoundingClientRect().width;
     this.hover.select('rect')
       .attr('width', width + 6)
