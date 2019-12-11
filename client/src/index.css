@@ -195,14 +195,14 @@ form {
   background-color: #ffc38a;
   border-radius: 50%;
   box-shadow: 0 6px 10px 0 #666;
-
+  z-index: 1;
   font-size: 40px;
-  line-height: 45px;
+  line-height: 46px;
   color: white;
   text-align: center;
   
   position: fixed;
-  right: 65px;
+  right: 60px;
   bottom: 100px;
   
  transition: all 0.1s ease-in-out;
