@@ -49,6 +49,7 @@ class ExpensesList extends Component {
           errMsg: null
         })
         this.props.getExpenses('')
+        this.props.getTodayExpenses()
         this.handleAddFormVisibility()
       })
       .catch(error => {
