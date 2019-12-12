@@ -53,7 +53,7 @@ class AddExpenseForm extends Component {
           <input name='amount' type='number' value={this.state.amount} onChange={e => this.handleInputChange(e)} placeholder='Amount' className="expense-input" />
           <input name='category' type='text' value={this.state.category} onChange={e => this.handleInputChange(e)} placeholder='Category' className="expense-input" />
           <input name='dateOfExpense' type='date' value={this.state.dateOfExpense} onChange={e => this.handleInputChange(e)} placeholder='Date' className="expense-input" />
-          <button type='submit' className="expense-btn btn btn-primary">Add new</button>
+          <button type='submit' className="expense-btn btn btn-primary">Add new expense</button>
           {this.state.errMsg ? this.state.errMsg : ''}
         </form>
       

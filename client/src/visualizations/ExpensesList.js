@@ -80,12 +80,12 @@ class ExpensesList extends Component {
   }
 
   prevWeek = () => {
-    var selectedWeek = d3.timeWeek.offset(this.props.selectedWeek, -1);
+    let selectedWeek = d3.timeWeek.offset(this.props.selectedWeek, -1);
     this.props.getSelectedWeek(selectedWeek)
   }
 
   nextWeek = () => {
-    var selectedWeek = d3.timeWeek.offset(this.props.selectedWeek, 1);
+    let selectedWeek = d3.timeWeek.offset(this.props.selectedWeek, 1);
     this.props.getSelectedWeek(selectedWeek)
   }
 
@@ -120,9 +120,6 @@ class ExpensesList extends Component {
             editDate={this.editDate}
             selectedWeek={this.props.selectedWeek}
             expenses={this.props.expenses}
-            handleEditFormVisibility={this.handleEditFormVisibility}
-            handleAddFormVisibility={this.handleAddFormVisibility}
-            getEditObject={this.getEditObject}
           />
           <Expenses
             width={this.props.parentWidth}
@@ -131,7 +128,6 @@ class ExpensesList extends Component {
             selectedWeek={this.props.selectedWeek}
             expenses={this.props.expenses}
             handleEditFormVisibility={this.handleEditFormVisibility}
-            handleAddFormVisibility={this.handleAddFormVisibility}
             getEditObject={this.getEditObject}
           />
         </svg>

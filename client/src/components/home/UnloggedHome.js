@@ -9,7 +9,7 @@ const UnloggedHome = () => {
           // fontSize: '100px',
           // fontWeight: 'bold'
         }}>liquid</h1>
-        {/* <h4>Your personal expense-manager</h4> */}
+        {/* <p>expense manager</p> */}
       </div>
       <div className='login-signup'>
         <div> <Link to='/login'><button className='btn btn-primary auth-btn'>Login</button></Link> </div>

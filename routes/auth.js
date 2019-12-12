@@ -17,7 +17,7 @@ router.get('/checkuser', (req, res, next) => {
 
 // Sign up
 router.post('/signup', (req, res, next) => {
-  const username = req.body.username;
+  const username = req.body.username
   const password = req.body.password;
 
   if (!username || !password) {

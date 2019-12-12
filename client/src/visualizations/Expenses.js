@@ -123,7 +123,7 @@ class Expenses extends Component {
     this.circles = this.circles.enter().append('circle')
       .classed('expense', true)
       .attr('id', this.props.expenses._id) 
-      .attr('fill', this.props.colors.white)
+      .attr('fill', 'white')
       .style('cursor', 'move')
       .on('mouseover', this.mouseOver)
       .on('mouseleave', () => this.hover.style('display', 'none'))

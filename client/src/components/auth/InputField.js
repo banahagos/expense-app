@@ -3,7 +3,7 @@ import React from 'react'
 const InputField = props => {
   return (
     <div>
-      <div class="form-group">
+      <div className="form-group">
         <label>{props.label}</label>
         <input
           type={props.type}

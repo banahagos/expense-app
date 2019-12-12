@@ -197,7 +197,7 @@ form {
   box-shadow: 0 6px 10px 0 #666;
   z-index: 1;
   font-size: 40px;
-  line-height: 46px;
+  line-height: 47px;
   color: white;
   text-align: center;
   
@@ -275,6 +275,13 @@ form {
   color: #fff;
   font-size: 100px;
   font-weight: bold,
+}
+
+.unlogged-home p{
+  background-color: #ffc38a;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 18px;
 }
 
 .auth-msg{
